@@ -30,7 +30,7 @@ function App() {
         <>
             <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4 w-fit h-fit">
                 <ul>
-                    {tasks.map((task) => (
+                    {tasks.map((task, taskIndex) => (
                         <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
                             {task.name}
                             <button
@@ -42,6 +42,13 @@ function App() {
                             <button
                                 type="button"
                                 className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                                onClick={() => {
+                                    setTasks(
+                                        tasks.filter(
+                                            (_, idx) => idx != taskIndex
+                                        )
+                                    )
+                                }}
                             >
                                 <XMarkIcon className="w-7 h-7" />
                             </button>
