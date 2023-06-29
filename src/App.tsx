@@ -1,27 +1,46 @@
 import { BeakerIcon } from '@heroicons/react/20/solid'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { useState } from 'react'
+
+interface Task {
+    name: string
+    state: boolean
+    value?: number
+}
 
 function App() {
+    const [tasks, setTasks] = useState<Task[]>([
+        {
+            name: 'Initial task',
+            state: false,
+            value: 0,
+        },
+    ])
+
+    console.log(tasks)
+
     return (
         <>
             <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4 w-fit h-fit">
                 <ul>
-                    <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
-                        initial task
-                        <button
-                            type="button"
-                            className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
-                        >
-                            <CheckIcon className="w-7 h-7" />
-                        </button>
-                        <button
-                            type="button"
-                            className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
-                        >
-                            <XMarkIcon className="w-7 h-7" />
-                        </button>
-                    </li>
+                    {tasks.map((task) => (
+                        <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
+                            {task.name}
+                            <button
+                                type="button"
+                                className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                            >
+                                <CheckIcon className="w-7 h-7" />
+                            </button>
+                            <button
+                                type="button"
+                                className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                            >
+                                <XMarkIcon className="w-7 h-7" />
+                            </button>
+                        </li>
+                    ))}
                 </ul>
                 <button
                     type="button"
