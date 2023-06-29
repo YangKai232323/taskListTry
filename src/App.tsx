@@ -18,6 +18,10 @@ function App() {
         },
     ])
 
+    function addTask(task: Task) {
+        setTasks([...tasks, task])
+    }
+
     console.log(tasks)
 
     return (
@@ -45,6 +49,13 @@ function App() {
                 <button
                     type="button"
                     className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4 mr-0"
+                    onClick={() => {
+                        addTask({
+                            name: 'Second task',
+                            state: true,
+                            value: 100000,
+                        })
+                    }}
                 >
                     Add Task
                 </button>
