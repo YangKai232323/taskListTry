@@ -72,6 +72,9 @@ function App() {
                 <button
                     type="button"
                     className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
+                    onClick={() => {
+                        setTasks([])
+                    }}
                 >
                     Delete Task
                 </button>
