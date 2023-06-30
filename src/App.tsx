@@ -10,6 +10,8 @@ interface Task {
 }
 
 function App() {
+    const currentSiteState = 'active'
+
     const [tasks, setTasks] = useState<Task[]>([
         {
             name: 'Initial task',
@@ -24,18 +26,74 @@ function App() {
         setTasks([...tasks, task])
     }
 
+    const [completedTasks, setCompletedTasks] = useState<Task[]>([
+        {
+            name: 'Auto-completed task',
+            state: true,
+            value: 0,
+        },
+    ])
+
+    function addCompletedTask(task: Task) {
+        setCompletedTasks([...completedTasks, task])
+    }
+
     console.log(tasks)
 
     return (
         <>
+            <div>
+                <button className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4">
+                    Active
+                </button>
+                <button className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4">
+                    Completed
+                </button>
+            </div>
+            <div>
+                <ul>
+                    {completedTasks.map((task, taskIndex) => (
+                        <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
+                            {task.name}
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4 w-fit h-fit">
                 <ul>
                     {tasks.map((task, taskIndex) => (
                         <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
                             {task.name}
+                            {task.state && (
+                                <small className="mx-1">completed</small>
+                            )}
                             <button
                                 type="button"
                                 className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                                onClick={() => {
+                                    setTasks(
+                                        // tasks.filter(
+                                        //     (_, idx) => idx != taskIndex
+                                        // )
+
+                                        tasks.map((task, idx) => {
+                                            // if (taskIndex === idx) {
+                                            //     task.state = true
+                                            // }
+                                            // return task
+                                            if (taskIndex === idx) {
+                                                task.state = true
+                                                addCompletedTask(task)
+                                            }
+                                            return task
+                                        })
+                                    )
+                                    setTasks(
+                                        tasks.filter(
+                                            (_, idx) => idx != taskIndex
+                                        )
+                                    )
+                                }}
                             >
                                 <CheckIcon className="w-7 h-7" />
                             </button>
@@ -66,11 +124,19 @@ function App() {
                     type="button"
                     className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4 mr-0"
                     onClick={() => {
-                        addTask({
-                            name: inputTaskName || '',
-                            state: true,
-                            value: 100000,
-                        })
+                        if (
+                            inputTaskName === '' ||
+                            inputTaskName === undefined ||
+                            inputTaskName === null
+                        ) {
+                            alert('Please, enter something before add task')
+                        } else {
+                            addTask({
+                                name: inputTaskName || '',
+                                state: false,
+                                value: 100000,
+                            })
+                        }
                     }}
                 >
                     Add Task
@@ -83,7 +149,7 @@ function App() {
                         setTasks([])
                     }}
                 >
-                    Delete Task
+                    Delete All Tasks
                 </button>
             </div>
         </>
