@@ -9,6 +9,12 @@ interface Task {
     value?: number
 }
 
+interface Project {
+    name: string
+    tasks?: Task[]
+    completePercents?: number
+}
+
 function App() {
     // const currentSiteState = 'completed'
     const [currentSiteState, changeSiteState] = useState<string>('active')
@@ -21,14 +27,31 @@ function App() {
         },
     ])
 
+    const [currentProject, changeProject] = useState<Project[]>([
+        {
+            name: 'Initial project',
+            tasks: tasks,
+        },
+    ])
+
     const [inputTaskName, setInputTaskName] = useState<string>('')
+
+    const [inputProjectName, setInputProjectName] = useState<string>('')
 
     function clearInput(inputTaskName: string) {
         setInputTaskName('')
     }
 
+    function clearProjectInput(inputProjectName: string) {
+        setInputProjectName('')
+    }
+
     function addTask(task: Task) {
         setTasks([...tasks, task])
+    }
+
+    function addProject(project: string) {
+        setProjects([...projects, project])
     }
 
     const [completedTasks, setCompletedTasks] = useState<Task[]>([
@@ -43,7 +66,7 @@ function App() {
         setCompletedTasks([...completedTasks, task])
     }
 
-    console.log(tasks)
+    const [projects, setProjects] = useState<string[]>(['Initial project'])
 
     if (currentSiteState === 'completed') {
         return (
@@ -61,11 +84,11 @@ function App() {
                     <button
                         className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
                         onClick={() => {
-                            changeSiteState('completed')
+                            changeSiteState('projects')
                             clearInput(inputTaskName)
                         }}
                     >
-                        Completed
+                        Projects
                     </button>
                 </div>
                 <div>
@@ -86,20 +109,20 @@ function App() {
                     <button
                         className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
                         onClick={() => {
-                            changeSiteState('active')
-                            clearInput(inputTaskName)
-                        }}
-                    >
-                        Active
-                    </button>
-                    <button
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={() => {
                             changeSiteState('completed')
                             clearInput(inputTaskName)
                         }}
                     >
                         Completed
+                    </button>
+                    <button
+                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
+                        onClick={() => {
+                            changeSiteState('projects')
+                            clearInput(inputTaskName)
+                        }}
+                    >
+                        Projects
                     </button>
                 </div>
                 <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4 w-fit h-fit">
@@ -157,17 +180,20 @@ function App() {
                         ))}
                     </ul>
                     <input
+                        id="taskInput"
                         className="text-2xl p-1 m-1 ml-3 rounded-lg border-slate-500 border-4 items-center justify-center flex mt-4"
                         type="text"
                         placeholder="Enter task name"
                         onInput={(event: any) => {
                             setInputTaskName(event.target.value)
+                            // event.target.value = ''
                         }}
                     />
                     <button
                         type="button"
                         className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4 mr-0"
                         onClick={() => {
+                            // clearInput(inputTaskName)
                             if (
                                 inputTaskName === '' ||
                                 inputTaskName === undefined ||
@@ -194,6 +220,70 @@ function App() {
                         }}
                     >
                         Delete All Tasks
+                    </button>
+                </div>
+            </>
+        )
+    } else if (currentSiteState === 'projects') {
+        return (
+            <>
+                <div>
+                    <p>Projects Page</p>
+                    <br />
+                    <button
+                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
+                        onClick={() => {
+                            changeSiteState('active')
+                            clearInput(inputTaskName)
+                        }}
+                    >
+                        Active
+                    </button>
+                    <button
+                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
+                        onClick={() => {
+                            changeSiteState('completed')
+                            clearInput(inputTaskName)
+                        }}
+                    >
+                        Completed
+                    </button>
+                </div>
+                <div>
+                    <ul>
+                        {projects.map((project, projectIndex) => (
+                            <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
+                                <button
+                                    onClick={() =>
+                                        changeProject([
+                                            {
+                                                name: project,
+                                                completePercents: 0,
+                                                tasks: [],
+                                            },
+                                        ])
+                                    }
+                                >
+                                    {project}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Enter project name"
+                        className="text-2xl p-1 m-1 ml-3 rounded-lg border-slate-500 border-4 items-center justify-center flex mt-4"
+                        onInput={(event: any) =>
+                            setInputProjectName(event.target.value)
+                        }
+                    />
+                    <button
+                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
+                        onClick={() => addProject(inputProjectName)}
+                    >
+                        Create project
                     </button>
                 </div>
             </>
