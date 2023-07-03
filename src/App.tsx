@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Project, Task } from './types'
 import { TaskList } from './TaskList'
+import { ProjectList } from './ProjectList'
 
 function App() {
     const [currentSiteState, changeSiteState] = useState<string>('active')
@@ -130,6 +131,28 @@ function App() {
             </>
         )
     } else if (currentSiteState === 'projects') {
+        return (
+            <ProjectList
+                projects={projects}
+                addProject={(projectName: string) => {
+                    setProjects([
+                        ...projects,
+                        {
+                            name: projectName,
+                            tasks: [],
+                        },
+                    ])
+                }}
+                deleteProject={(projectName: string) => {
+                    setProjects(
+                        projects.filter(
+                            (project) => project.name !== projectName
+                        )
+                    )
+                }}
+                setProject={changeProject}
+            ></ProjectList>
+        )
     }
     // ✔✔✓🗸✔
 }

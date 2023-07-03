@@ -29,7 +29,7 @@ export function TaskList({
             <ul className="border-b-8 border-slate-400">
                 {tasks.map((task) => (
                     <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
-                        {task.name}
+                        <p className="break-all">{task.name}</p>
                         {editable && (
                             <>
                                 <button

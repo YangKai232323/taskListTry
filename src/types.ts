@@ -6,6 +6,6 @@ export interface Task {
 
 export interface Project {
     name: string
-    tasks?: Task[]
+    tasks: Task[]
     completePercents?: number
 }
