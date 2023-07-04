@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Project, Task } from './types'
+import { PageType, Project, Task } from './types'
 import { TaskList } from './TaskList'
 import { ProjectList } from './ProjectList'
+import { Navigation } from './Navigation'
 
 function App() {
-    const [currentSiteState, changeSiteState] = useState<string>('active')
+    const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
 
     const [projects, setProjects] = useState<Project[]>([
         {
@@ -19,11 +20,9 @@ function App() {
         },
     ])
 
-    const [currentProject, changeProject] = useState<number>(0)
+    const [currentProject, setProject] = useState<number>(0)
 
     const tasks = projects[currentProject].tasks as Task[]
-
-    const [inputProjectName, setInputProjectName] = useState<string>('')
 
     function setTasks(tasks: Task[]) {
         setProjects(
@@ -47,51 +46,23 @@ function App() {
         setProjects([...projects, project])
     }
 
-    if (currentSiteState === 'completed') {
+    if (currentPage === PageType.Completed) {
         return (
-            <>
-                <div>
-                    <button
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={() => {
-                            changeSiteState('active')
-                        }}
-                    >
-                        Active
-                    </button>
-                    <button
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={() => {
-                            changeSiteState('projects')
-                        }}
-                    >
-                        Projects
-                    </button>
-                </div>
+            <div>
+                <Navigation
+                    currentPage={currentPage}
+                    changeCurrentPage={setCurrentPage}
+                ></Navigation>
                 <TaskList tasks={tasks.filter((task) => task.state)}></TaskList>
-            </>
+            </div>
         )
-    } else if (currentSiteState === 'active') {
+    } else if (currentPage === PageType.Active) {
         return (
-            <>
-                <div>
-                    <button
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={() => {
-                            changeSiteState('completed')
-                        }}
-                    >
-                        Completed
-                    </button>
-                    <button
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={() => {
-                            changeSiteState('projects')
-                        }}
-                    >
-                        Projects
-                    </button>
-                </div>
+            <div>
+                <Navigation
+                    currentPage={currentPage}
+                    changeCurrentPage={setCurrentPage}
+                ></Navigation>
                 <TaskList
                     tasks={tasks.filter((task) => !task.state) || []}
                     addTask={(taskName) => {
@@ -128,29 +99,37 @@ function App() {
                     }}
                     editable
                 ></TaskList>
-            </>
+            </div>
         )
-    } else if (currentSiteState === 'projects') {
+    } else if (currentPage === PageType.Projects) {
         return (
-            <ProjectList
-                projects={projects}
-                addProject={(projectName: string) => {
-                    setProjects([
-                        ...projects,
-                        {
-                            name: projectName,
-                            tasks: [],
-                        },
-                    ])
-                }}
-                deleteProject={(projectId: number) => {
-                    setProjects(projects.filter((_, id) => id !== projectId))
-                }}
-                setProject={(projectId) => {
-                    changeProject(projectId)
-                    changeSiteState('active')
-                }}
-            ></ProjectList>
+            <div>
+                <Navigation
+                    currentPage={currentPage}
+                    changeCurrentPage={setCurrentPage}
+                ></Navigation>
+                <ProjectList
+                    projects={projects}
+                    addProject={(projectName: string) => {
+                        setProjects([
+                            ...projects,
+                            {
+                                name: projectName,
+                                tasks: [],
+                            },
+                        ])
+                    }}
+                    deleteProject={(projectId: number) => {
+                        setProjects(
+                            projects.filter((_, id) => id !== projectId)
+                        )
+                    }}
+                    setProject={(projectId) => {
+                        setProject(projectId)
+                        setCurrentPage(PageType.Active)
+                    }}
+                ></ProjectList>
+            </div>
         )
     }
     // ✔✔✓🗸✔

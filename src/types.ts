@@ -9,3 +9,9 @@ export interface Project {
     tasks: Task[]
     completePercents?: number
 }
+
+export enum PageType {
+    Active = 'active',
+    Completed = 'completed',
+    Projects = 'projects',
+}
