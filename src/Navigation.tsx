@@ -34,18 +34,32 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     Completed
                 </button>
             </div>
-            <button
-                className={
-                    currentPage === PageType.Projects
-                        ? 'font-semi-bold text-xl bg-sky-300 p-1 border-sky-500 border-4 w-full mt-2 rounded-md'
-                        : 'font-semi-bold text-xl bg-sky-100 p-1 border-sky-100 border-4 w-full mt-2 rounded-md'
-                }
-                onClick={() => {
-                    changeCurrentPage(PageType.Projects)
-                }}
-            >
-                Projects
-            </button>
+            <div className="flex justify-between gap-2 pt-2">
+                <button
+                    className={
+                        currentPage === PageType.Projects
+                            ? 'font-semi-bold text-xl bg-sky-300 p-1 border-sky-500 border-4 w-full rounded-md'
+                            : 'font-semi-bold text-xl bg-sky-100 p-1 border-sky-100 border-4 w-full rounded-md'
+                    }
+                    onClick={() => {
+                        changeCurrentPage(PageType.Projects)
+                    }}
+                >
+                    Projects
+                </button>
+                <button
+                    className={
+                        currentPage === PageType.Profile
+                            ? 'font-semi-bold text-xl bg-orange-300 p-1 border-orange-500 border-4 w-full rounded-md'
+                            : 'font-semi-bold text-xl bg-orange-100 p-1 border-orange-100 border-4 w-full rounded-md'
+                    }
+                    onClick={() => {
+                        changeCurrentPage(PageType.Profile)
+                    }}
+                >
+                    Profile
+                </button>
+            </div>
         </div>
     )
 }

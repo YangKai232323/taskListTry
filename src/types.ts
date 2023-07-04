@@ -14,4 +14,5 @@ export enum PageType {
     Active = 'active',
     Completed = 'completed',
     Projects = 'projects',
+    Profile = 'profile',
 }

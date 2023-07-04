@@ -3,6 +3,7 @@ import { PageType, Project, Task } from './types'
 import { TaskList } from './TaskList'
 import { ProjectList } from './ProjectList'
 import { Navigation } from './Navigation'
+import { Profile } from './Profile'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
@@ -135,6 +136,16 @@ function App() {
                         setCurrentPage(PageType.Active)
                     }}
                 ></ProjectList>
+            </div>
+        )
+    } else if (currentPage === PageType.Profile) {
+        return (
+            <div>
+                <Navigation
+                    currentPage={currentPage}
+                    changeCurrentPage={setCurrentPage}
+                ></Navigation>
+                <Profile projects={projects}></Profile>
             </div>
         )
     }

@@ -34,14 +34,14 @@ export function TaskList({
                             <>
                                 <button
                                     type="button"
-                                    className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                                    className="text-3xl border-black border-2 m-2"
                                     onClick={() => completeTask?.(task.name)}
                                 >
                                     <CheckIcon className="w-7 h-7" />
                                 </button>
                                 <button
                                     type="button"
-                                    className="hover:rounded-md hover:scale-75 text-3xl border-black border-2 m-2"
+                                    className="text-3xl border-black border-2 m-2"
                                     onClick={() => deleteTask?.(task.name)}
                                 >
                                     <XMarkIcon className="w-7 h-7" />
