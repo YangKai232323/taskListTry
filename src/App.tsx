@@ -150,7 +150,10 @@ function App() {
                         )
                     )
                 }}
-                setProject={changeProject}
+                setProject={(projectId) => {
+                    changeProject(projectId)
+                    changeSiteState('active')
+                }}
             ></ProjectList>
         )
     }

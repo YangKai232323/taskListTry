@@ -18,9 +18,9 @@ export function ProjectList({
     const [inputProjectName, setInputProjectName] = useState('')
 
     return (
-        <div className=" bg-slate-300 border-2 border-gray-800 rounded-xl p-2">
+        <div className="bg-slate-300 border-2 border-gray-800 rounded-xl p-2 mt-2">
             <ul className="grid md:grid-cols-2 lg:grid-cols-3">
-                {projects.map((project) => {
+                {projects.map((project, projectId) => {
                     const numberOfCompletedTasks = project.tasks.filter(
                         (task) => task.state
                     ).length
@@ -28,11 +28,13 @@ export function ProjectList({
                     const numberOfTasks = project.tasks.length
 
                     return (
-                        <li className="flex flex-col bg-slate-200 border-2 border-gray-800 items-center m-3 ">
+                        <li
+                            className="flex flex-col bg-slate-200 border-2 border-gray-800 items-center m-3 hover:cursor-pointer hover:shadow-lg hover:shadow-slate-500 transition-all "
+                            onClick={() => setProject(projectId)}
+                        >
                             <h3 className="mt-2 font-bold break-all">
                                 {project.name}
                             </h3>
-
                             <div className="flex gap-2 items-center m-3">
                                 <progress
                                     className="mt-2"
