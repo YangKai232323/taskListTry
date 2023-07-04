@@ -53,7 +53,13 @@ function App() {
                     currentPage={currentPage}
                     changeCurrentPage={setCurrentPage}
                 ></Navigation>
-                <TaskList tasks={tasks.filter((task) => task.state)}></TaskList>
+                {tasks.filter((task) => task.state).length > 0 ? (
+                    <TaskList
+                        tasks={tasks.filter((task) => task.state)}
+                    ></TaskList>
+                ) : (
+                    <p>No completed tasks</p>
+                )}
             </div>
         )
     } else if (currentPage === PageType.Active) {

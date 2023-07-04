@@ -26,7 +26,7 @@ export function TaskList({
 
     return (
         <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4 w-fit h-fit">
-            <ul className="border-b-8 border-slate-400">
+            <ul className="border-slate-400">
                 {tasks.map((task) => (
                     <li className="rounded-xl font-bold m-4 text-2xl w-fit p-2 border-gray-500 border-4 flex items-center">
                         <p className="break-all">{task.name}</p>
