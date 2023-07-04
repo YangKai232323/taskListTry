@@ -143,12 +143,8 @@ function App() {
                         },
                     ])
                 }}
-                deleteProject={(projectName: string) => {
-                    setProjects(
-                        projects.filter(
-                            (project) => project.name !== projectName
-                        )
-                    )
+                deleteProject={(projectId: number) => {
+                    setProjects(projects.filter((_, id) => id !== projectId))
                 }}
                 setProject={(projectId) => {
                     changeProject(projectId)

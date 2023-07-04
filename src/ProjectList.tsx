@@ -1,12 +1,13 @@
 import { PlusIcon } from '@heroicons/react/24/solid'
 import { Task, Project } from './types'
 import { useState } from 'react'
+import { ProjectSwitchMenu } from './ProjectSwitchMenu'
 
 interface Props {
     projects: Project[]
     addProject(projectName: string): void
     setProject(projectId: number): void
-    deleteProject(projectName: string): void
+    deleteProject(projectName: number): void
 }
 
 export function ProjectList({
@@ -16,6 +17,10 @@ export function ProjectList({
     deleteProject,
 }: Props) {
     const [inputProjectName, setInputProjectName] = useState('')
+
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
+
+    const [clickedProject, setClickedProject] = useState(-1)
 
     return (
         <div className="bg-slate-300 border-2 border-gray-800 rounded-xl p-2 mt-2">
@@ -30,7 +35,11 @@ export function ProjectList({
                     return (
                         <li
                             className="flex flex-col bg-slate-200 border-2 border-gray-800 items-center m-3 hover:cursor-pointer hover:shadow-lg hover:shadow-slate-500 transition-all "
-                            onClick={() => setProject(projectId)}
+                            // onClick={() => setProject(projectId)}
+                            onClick={() => {
+                                setClickedProject(projectId)
+                                setIsMenuVisible(true)
+                            }}
                         >
                             <h3 className="mt-2 font-bold break-all">
                                 {project.name}
@@ -55,6 +64,18 @@ export function ProjectList({
                     )
                 })}
             </ul>
+            {isMenuVisible && (
+                <ProjectSwitchMenu
+                    projectId={clickedProject}
+                    close={() => setIsMenuVisible(false)}
+                    enterProject={(clickedProject) =>
+                        setProject(clickedProject)
+                    }
+                    deleteProject={(clickedProject) =>
+                        deleteProject(clickedProject)
+                    }
+                ></ProjectSwitchMenu>
+            )}
             <div className="flex p-4">
                 <input
                     type="text"
