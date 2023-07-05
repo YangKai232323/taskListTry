@@ -53,14 +53,14 @@ function App() {
     function addToHistory(
         taskName: string,
         currentProjectName: string,
-        isTaskDelete: boolean
+        taskState: string
     ) {
         history.length > 0
             ? setHistory([
                   ...history,
-                  [taskName, currentProjectName, isTaskDelete],
+                  [taskName, currentProjectName, taskState],
               ])
-            : setHistory([[taskName, currentProjectName, isTaskDelete]])
+            : setHistory([[taskName, currentProjectName, taskState]])
     }
 
     if (currentPage === PageType.Completed) {
@@ -102,7 +102,7 @@ function App() {
                         addToHistory(
                             taskName,
                             projects[currentProject].name,
-                            false
+                            'active'
                         )
                         return 'All ok'
                     }}
@@ -119,7 +119,11 @@ function App() {
                                 return task
                             })
                         )
-                        console.log('ALOHA')
+                        addToHistory(
+                            taskName,
+                            projects[currentProject].name,
+                            'completed'
+                        )
                     }}
                     deleteTask={(taskName) => {
                         const tasksForSet = tasks.filter(
@@ -129,7 +133,7 @@ function App() {
                         addToHistory(
                             taskName,
                             projects[currentProject].name,
-                            true
+                            'deleted'
                         )
                     }}
                     editable
