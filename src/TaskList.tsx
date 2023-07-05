@@ -5,6 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 
 interface Props {
     tasks: Task[]
+    currentProject: string
     addTask?(taskName: string): string //string because we sent result to user
     deleteTask?(taskName: string): void
     completeTask?(taskName: string): void

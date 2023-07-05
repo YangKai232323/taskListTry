@@ -4,6 +4,7 @@ import { TaskList } from './TaskList'
 import { ProjectList } from './ProjectList'
 import { Navigation } from './Navigation'
 import { Profile } from './Profile'
+import { History } from './History'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
@@ -47,6 +48,21 @@ function App() {
         setProjects([...projects, project])
     }
 
+    const [history, setHistory] = useState<any>([])
+
+    function addToHistory(
+        taskName: string,
+        currentProjectName: string,
+        isTaskDelete: boolean
+    ) {
+        history.length > 0
+            ? setHistory([
+                  ...history,
+                  [taskName, currentProjectName, isTaskDelete],
+              ])
+            : setHistory([[taskName, currentProjectName, isTaskDelete]])
+    }
+
     if (currentPage === PageType.Completed) {
         return (
             <div>
@@ -56,6 +72,7 @@ function App() {
                 ></Navigation>
                 {tasks.filter((task) => task.state).length > 0 ? (
                     <TaskList
+                        currentProject={projects[currentProject].name}
                         tasks={tasks.filter((task) => task.state)}
                     ></TaskList>
                 ) : (
@@ -71,6 +88,7 @@ function App() {
                     changeCurrentPage={setCurrentPage}
                 ></Navigation>
                 <TaskList
+                    currentProject={projects[currentProject].name}
                     tasks={tasks.filter((task) => !task.state) || []}
                     addTask={(taskName) => {
                         if (!taskName) {
@@ -81,6 +99,11 @@ function App() {
                             state: false,
                             value: 10,
                         })
+                        addToHistory(
+                            taskName,
+                            projects[currentProject].name,
+                            false
+                        )
                         return 'All ok'
                     }}
                     nukeTasks={() => setTasks([])}
@@ -103,6 +126,11 @@ function App() {
                             (task) => task.name !== taskName
                         )
                         setTasks(tasksForSet)
+                        addToHistory(
+                            taskName,
+                            projects[currentProject].name,
+                            true
+                        )
                     }}
                     editable
                 ></TaskList>
@@ -145,7 +173,20 @@ function App() {
                     currentPage={currentPage}
                     changeCurrentPage={setCurrentPage}
                 ></Navigation>
-                <Profile projects={projects}></Profile>
+                <Profile
+                    projects={projects}
+                    changeCurrentPage={setCurrentPage}
+                ></Profile>
+            </div>
+        )
+    } else if (currentPage === PageType.History) {
+        return (
+            <div>
+                <Navigation
+                    currentPage={currentPage}
+                    changeCurrentPage={setCurrentPage}
+                ></Navigation>
+                <History history={history}></History>
             </div>
         )
     }

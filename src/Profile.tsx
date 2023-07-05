@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Task, Project } from './types'
+import { Task, Project, PageType } from './types'
 
 interface Props {
     projects: Project[]
+    changeCurrentPage(currentPage: PageType): void
 }
 
-export function Profile({ projects }: Props) {
+export function Profile({ projects, changeCurrentPage }: Props) {
     const [username, setUsername] = useState('Uknown User')
 
     const [avatar, setAvatar] = useState(-1)
@@ -44,6 +45,9 @@ export function Profile({ projects }: Props) {
                         <p>{currentExp % 100} / 100</p>
                     </div>
                 </div>
+                <button onClick={() => changeCurrentPage(PageType.History)}>
+                    Check History
+                </button>
             </div>
         </>
     )
