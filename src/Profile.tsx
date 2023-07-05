@@ -10,7 +10,7 @@ interface Props {
 export function Profile({ projects, changeCurrentPage }: Props) {
     const [username, setUsername] = useState('Uknown User')
 
-    const [currentAvatar, setCurrentAvatar] = useState<number>(11)
+    const [currentAvatar, setCurrentAvatar] = useState(9)
 
     const [isAvatarMenuVisible, setIsAvatarMenuVisible] =
         useState<boolean>(false)
@@ -22,6 +22,21 @@ export function Profile({ projects, changeCurrentPage }: Props) {
         })
         return value
     }
+
+    const avatars: string[] = [
+        '/src/images/avatar1.svg',
+        '/src/images/avatar2.svg',
+        '/src/images/avatar3.svg',
+        '/src/images/avatar4.svg',
+        '/src/images/avatar5.svg',
+        '/src/images/avatar6.svg',
+        '/src/images/avatar7.svg',
+        '/src/images/avatar8.svg',
+        '/src/images/avatar9.svg ',
+        '/src/images/avatar10.svg',
+        '/src/images/avatar11.svg',
+        '/src/images/avatar12.svg',
+    ]
 
     const currentExp = countExp(projects)
 
@@ -35,18 +50,17 @@ export function Profile({ projects, changeCurrentPage }: Props) {
                 <div className="flex mx-4 items-center gap-4">
                     <img
                         onClick={() => setIsAvatarMenuVisible(true)}
-                        src="/src/images/avatar12.svg"
+                        src={avatars[currentAvatar]}
                         alt="avatar"
-                        className="border-4 border-slate-500"
+                        className=" w-24 h-24 rounded-[50%]"
                     />
                     <h3 className="font-bold text-2xl break-all">{username}</h3>
                 </div>
                 {isAvatarMenuVisible && (
                     <AvatarMenu
                         currentAvatar={currentAvatar}
-                        setCurrentAvatar={(avatarId) =>
-                            setCurrentAvatar(avatarId)
-                        }
+                        setCurrentAvatar1={setCurrentAvatar}
+                        setIsVisible={setIsAvatarMenuVisible}
                     ></AvatarMenu>
                 )}
                 <div className="flex flex-col ml-4 gap-1 items-center">
