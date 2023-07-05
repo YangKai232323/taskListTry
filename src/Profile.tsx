@@ -34,7 +34,7 @@ export function Profile({ projects, changeCurrentPage }: Props) {
                         alt="avatar"
                         className="border-4 border-slate-500"
                     />
-                    <h3 className="font-bold text-2xl">{username}</h3>
+                    <h3 className="font-bold text-2xl break-all">{username}</h3>
                 </div>
                 <div className="flex flex-col ml-4 gap-1 items-center">
                     <h2 className="font- bold">
