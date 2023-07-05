@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Task, Project, PageType } from './types'
+import { AvatarMenu } from './AvatarMenu'
 
 interface Props {
     projects: Project[]
@@ -9,7 +10,10 @@ interface Props {
 export function Profile({ projects, changeCurrentPage }: Props) {
     const [username, setUsername] = useState('Uknown User')
 
-    const [avatar, setAvatar] = useState(-1)
+    const [currentAvatar, setCurrentAvatar] = useState<number>(11)
+
+    const [isAvatarMenuVisible, setIsAvatarMenuVisible] =
+        useState<boolean>(false)
 
     function countExp(projects: Project[]): number {
         let value = 0
@@ -30,12 +34,21 @@ export function Profile({ projects, changeCurrentPage }: Props) {
             <div className="flex flex-col gap-4 mt-4">
                 <div className="flex mx-4 items-center gap-4">
                     <img
-                        src="/src/images/unknownUserIcon.svg"
+                        onClick={() => setIsAvatarMenuVisible(true)}
+                        src="/src/images/avatar12.svg"
                         alt="avatar"
                         className="border-4 border-slate-500"
                     />
                     <h3 className="font-bold text-2xl break-all">{username}</h3>
                 </div>
+                {isAvatarMenuVisible && (
+                    <AvatarMenu
+                        currentAvatar={currentAvatar}
+                        setCurrentAvatar={(avatarId) =>
+                            setCurrentAvatar(avatarId)
+                        }
+                    ></AvatarMenu>
+                )}
                 <div className="flex flex-col ml-4 gap-1 items-center">
                     <h2 className="font- bold">
                         {countLevel(currentExp)} Level
