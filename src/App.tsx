@@ -24,6 +24,8 @@ function App() {
 
     const [currentProject, setProject] = useState<number>(0)
 
+    const [lastPage, setLastPage] = useState<PageType>(PageType.Active)
+
     const tasks = projects[currentProject].tasks as Task[]
 
     function setTasks(tasks: Task[]) {
@@ -68,7 +70,10 @@ function App() {
             <div>
                 <Navigation
                     currentPage={currentPage}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setLastPage(currentPage)
+                        setCurrentPage(currentPage)
+                    }}
                 ></Navigation>
                 {tasks.filter((task) => task.state).length > 0 ? (
                     <TaskList
@@ -85,7 +90,10 @@ function App() {
             <div>
                 <Navigation
                     currentPage={currentPage}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setLastPage(currentPage)
+                        setCurrentPage(currentPage)
+                    }}
                 ></Navigation>
                 <TaskList
                     currentProject={projects[currentProject].name}
@@ -145,7 +153,10 @@ function App() {
             <div>
                 <Navigation
                     currentPage={currentPage}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setLastPage(currentPage)
+                        setCurrentPage(currentPage)
+                    }}
                 ></Navigation>
                 <ProjectList
                     projects={projects}
@@ -175,11 +186,17 @@ function App() {
             <div>
                 <Navigation
                     currentPage={currentPage}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setLastPage(currentPage)
+                        setCurrentPage(currentPage)
+                    }}
                 ></Navigation>
                 <Profile
                     projects={projects}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setCurrentPage(currentPage)
+                        setLastPage(currentPage)
+                    }}
                 ></Profile>
             </div>
         )
@@ -188,7 +205,10 @@ function App() {
             <div>
                 <Navigation
                     currentPage={currentPage}
-                    changeCurrentPage={setCurrentPage}
+                    changeCurrentPage={(currentPage) => {
+                        setLastPage(currentPage)
+                        setCurrentPage(currentPage)
+                    }}
                 ></Navigation>
                 <History history={history}></History>
             </div>

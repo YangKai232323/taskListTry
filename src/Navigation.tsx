@@ -1,4 +1,6 @@
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { PageType } from './types'
+import { useState } from 'react'
 
 interface Props {
     currentPage: PageType
@@ -6,9 +8,24 @@ interface Props {
 }
 
 export function Navigation({ currentPage, changeCurrentPage }: Props) {
+    const [lastPage, setLastPage] = useState<PageType>()
+
     return (
         <div className="mt-2 w-screen px-2">
             <div className="flex justify-between gap-2">
+                <div className="flex">
+                    <button
+                        onClick={() => {
+                            if (lastPage) {
+                                changeCurrentPage(lastPage)
+                            } else {
+                                changeCurrentPage(PageType.Active)
+                            }
+                        }}
+                    >
+                        <ArrowLeftIcon className="w-12 h-12"></ArrowLeftIcon>
+                    </button>
+                </div>
                 <button
                     className={
                         currentPage === PageType.Active
@@ -17,6 +34,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Active)
+                        setLastPage(PageType.Active)
                     }}
                 >
                     Active
@@ -29,6 +47,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Completed)
+                        setLastPage(PageType.Completed)
                     }}
                 >
                     Completed
@@ -43,6 +62,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Projects)
+                        setLastPage(PageType.Projects)
                     }}
                 >
                     Projects
@@ -55,6 +75,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Profile)
+                        setLastPage(PageType.Profile)
                     }}
                 >
                     Profile
