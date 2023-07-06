@@ -64,10 +64,6 @@ function App() {
         setTasks([...tasks, task])
     }
 
-    function addProject(project: Project) {
-        setProjects([...projects, project])
-    }
-
     const [history, setHistory] = useState<any>([])
 
     function addToHistory(

@@ -6,11 +6,7 @@ interface Props {
     setIsVisible(is: boolean): void
 }
 
-export function AvatarMenu({
-    currentAvatar,
-    setCurrentAvatar1,
-    setIsVisible,
-}: Props) {
+export function AvatarMenu({ setCurrentAvatar1, setIsVisible }: Props) {
     const avatars: string[] = [
         '/src/images/avatar1.svg',
         '/src/images/avatar2.svg',

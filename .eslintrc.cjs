@@ -8,9 +8,10 @@ module.exports = {
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-    plugins: ['react-refresh', 'prettier' ],
+    plugins: ['react-refresh', 'prettier'],
     rules: {
         'react-refresh/only-export-components': 'warn',
-        "prettier/prettier": "warn",
+        'prettier/prettier': 'warn',
+        'no-unused-vars': 'off',
     },
 }

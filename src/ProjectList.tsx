@@ -1,5 +1,5 @@
 import { PlusIcon } from '@heroicons/react/24/solid'
-import { Task, Project } from './types'
+import { Project } from './types'
 import { useState } from 'react'
 import { ProjectSwitchMenu } from './ProjectSwitchMenu'
 

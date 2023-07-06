@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Task, Project, PageType } from './types'
+import { Project, PageType } from './types'
 import { AvatarMenu } from './AvatarMenu'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function Profile({ projects, changeCurrentPage }: Props) {
-    const [username, setUsername] = useState('Uknown User')
+    const [username, _setUsername] = useState('Uknown User')
 
     const [currentAvatar, setCurrentAvatar] = useState(9)
 
