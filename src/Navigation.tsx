@@ -21,6 +21,7 @@ export function Navigation({
             <div className="flex justify-between gap-2">
                 <div className="flex">
                     <button
+                        className="w-12 h-12"
                         onClick={() => {
                             const length = lastPage.length - 2
                             if (lastPage) {

@@ -105,7 +105,7 @@ function App() {
         )
     } else if (currentPage === PageType.Active) {
         return (
-            <div>
+            <div className="p-0 m-0">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
