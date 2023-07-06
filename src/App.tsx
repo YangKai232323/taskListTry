@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageType, Project, Task } from './types'
 import { TaskList } from './TaskList'
 import { ProjectList } from './ProjectList'
@@ -9,18 +9,32 @@ import { History } from './History'
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
 
-    const [projects, setProjects] = useState<Project[]>([
-        {
-            name: 'Initial project',
-            tasks: [
+    const [projects, setInMemoryProjects] = useState<Project[]>([])
+
+    function setProjects(projectList: Project[]): void {
+        setInMemoryProjects(projectList)
+        localStorage.setItem('projects', JSON.stringify(projectList))
+    }
+
+    useEffect(() => {
+        const projects = JSON.parse(localStorage.getItem('projects') || 'null')
+        if (projects) {
+            setInMemoryProjects(projects)
+        } else {
+            setInMemoryProjects([
                 {
-                    name: 'Initial task',
-                    state: false,
-                    value: 1,
+                    name: 'Initial project',
+                    tasks: [
+                        {
+                            name: 'Initial task',
+                            state: false,
+                            value: 10,
+                        },
+                    ],
                 },
-            ],
-        },
-    ])
+            ])
+        }
+    }, [])
 
     const [currentProject, setProject] = useState<number>(0)
 
@@ -30,7 +44,7 @@ function App() {
         setLastPage([...lastPage, page])
     }
 
-    const tasks = projects[currentProject].tasks as Task[]
+    const tasks = (projects[currentProject]?.tasks as Task[]) || []
 
     function setTasks(tasks: Task[]) {
         setProjects(
@@ -108,8 +122,8 @@ function App() {
                     lastPage={lastPage}
                 ></Navigation>
                 <TaskList
-                    currentProject={projects[currentProject].name}
-                    tasks={tasks.filter((task) => !task.state) || []}
+                    currentProject={projects[currentProject]?.name}
+                    tasks={tasks.filter((task) => !task?.state) || []}
                     addTask={(taskName) => {
                         if (!taskName) {
                             return 'Please enter something to textspace'
@@ -121,7 +135,7 @@ function App() {
                         })
                         addToHistory(
                             taskName,
-                            projects[currentProject].name,
+                            projects[currentProject]?.name,
                             'active'
                         )
                         return 'All ok'
@@ -130,7 +144,7 @@ function App() {
                     completeTask={(taskName) => {
                         setTasks(
                             tasks.map((task) => {
-                                if (taskName === task.name) {
+                                if (taskName === task?.name) {
                                     return {
                                         ...task,
                                         state: true,
@@ -141,7 +155,7 @@ function App() {
                         )
                         addToHistory(
                             taskName,
-                            projects[currentProject].name,
+                            projects[currentProject]?.name,
                             'completed'
                         )
                     }}

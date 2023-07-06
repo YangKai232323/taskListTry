@@ -1,0 +1,3 @@
+procs:
+  server: "npm run dev"
+  shell: "powershell"
