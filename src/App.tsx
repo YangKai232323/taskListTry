@@ -24,7 +24,11 @@ function App() {
 
     const [currentProject, setProject] = useState<number>(0)
 
-    const [lastPage, setLastPage] = useState<PageType>(PageType.Active)
+    const [lastPage, setLastPage] = useState<PageType[]>([PageType.Active])
+
+    function addLastPage(page: PageType): void {
+        setLastPage([...lastPage, page])
+    }
 
     const tasks = projects[currentProject].tasks as Task[]
 
@@ -69,9 +73,13 @@ function App() {
         return (
             <div>
                 <Navigation
+                    addLastPage={(page) => {
+                        addLastPage(page)
+                        console.log(page)
+                    }}
+                    lastPage={lastPage}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
-                        setLastPage(currentPage)
                         setCurrentPage(currentPage)
                     }}
                 ></Navigation>
@@ -89,11 +97,15 @@ function App() {
         return (
             <div>
                 <Navigation
+                    addLastPage={(page) => {
+                        addLastPage(page)
+                        console.log(page)
+                    }}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
-                        setLastPage(currentPage)
                         setCurrentPage(currentPage)
                     }}
+                    lastPage={lastPage}
                 ></Navigation>
                 <TaskList
                     currentProject={projects[currentProject].name}
@@ -152,9 +164,13 @@ function App() {
         return (
             <div>
                 <Navigation
+                    addLastPage={(page) => {
+                        addLastPage(page)
+                        console.log(page)
+                    }}
+                    lastPage={lastPage}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
-                        setLastPage(currentPage)
                         setCurrentPage(currentPage)
                     }}
                 ></Navigation>
@@ -185,9 +201,13 @@ function App() {
         return (
             <div>
                 <Navigation
+                    addLastPage={(page) => {
+                        addLastPage(page)
+                        console.log(page)
+                    }}
+                    lastPage={lastPage}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
-                        setLastPage(currentPage)
                         setCurrentPage(currentPage)
                     }}
                 ></Navigation>
@@ -195,7 +215,6 @@ function App() {
                     projects={projects}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
-                        setLastPage(currentPage)
                     }}
                 ></Profile>
             </div>
@@ -204,9 +223,13 @@ function App() {
         return (
             <div>
                 <Navigation
+                    lastPage={lastPage}
+                    addLastPage={(page) => {
+                        addLastPage(page)
+                        console.log(page)
+                    }}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
-                        setLastPage(currentPage)
                         setCurrentPage(currentPage)
                     }}
                 ></Navigation>

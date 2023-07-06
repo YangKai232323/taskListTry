@@ -1,23 +1,32 @@
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { PageType } from './types'
-import { useState } from 'react'
 
 interface Props {
     currentPage: PageType
     changeCurrentPage(currentPage: PageType): void
+    lastPage: PageType[]
+
+    addLastPage(page: PageType): void
 }
 
-export function Navigation({ currentPage, changeCurrentPage }: Props) {
-    const [lastPage, setLastPage] = useState<PageType>()
+export function Navigation({
+    currentPage,
+    changeCurrentPage,
+    lastPage,
 
+    addLastPage,
+}: Props) {
     return (
         <div className="mt-2 w-screen px-2">
             <div className="flex justify-between gap-2">
                 <div className="flex">
                     <button
                         onClick={() => {
+                            const length = lastPage.length - 2
                             if (lastPage) {
-                                changeCurrentPage(lastPage)
+                                console.log(lastPage[length])
+                                console.log(lastPage)
+                                changeCurrentPage(lastPage[length])
                             } else {
                                 changeCurrentPage(PageType.Active)
                             }
@@ -34,7 +43,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Active)
-                        setLastPage(PageType.Active)
+                        addLastPage(PageType.Active)
                     }}
                 >
                     Active
@@ -47,7 +56,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Completed)
-                        setLastPage(PageType.Completed)
+                        addLastPage(PageType.Completed)
                     }}
                 >
                     Completed
@@ -62,7 +71,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Projects)
-                        setLastPage(PageType.Projects)
+                        addLastPage(PageType.Projects)
                     }}
                 >
                     Projects
@@ -75,7 +84,7 @@ export function Navigation({ currentPage, changeCurrentPage }: Props) {
                     }
                     onClick={() => {
                         changeCurrentPage(PageType.Profile)
-                        setLastPage(PageType.Profile)
+                        addLastPage(PageType.Profile)
                     }}
                 >
                     Profile
