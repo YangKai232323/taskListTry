@@ -8,18 +8,18 @@ interface Props {
 
 export function AvatarMenu({ setCurrentAvatar1, setIsVisible }: Props) {
     const avatars: string[] = [
-        '/src/images/avatar1.svg',
-        '/src/images/avatar2.svg',
-        '/src/images/avatar3.svg',
-        '/src/images/avatar4.svg',
-        '/src/images/avatar5.svg',
-        '/src/images/avatar6.svg',
-        '/src/images/avatar7.svg',
-        '/src/images/avatar8.svg',
-        '/src/images/avatar9.svg ',
-        '/src/images/avatar10.svg',
-        '/src/images/avatar11.svg',
-        '/src/images/avatar12.svg',
+        '/avatar1.svg',
+        '/avatar2.svg',
+        '/avatar3.svg',
+        '/avatar4.svg',
+        '/avatar5.svg',
+        '/avatar6.svg',
+        '/avatar7.svg',
+        '/avatar8.svg',
+        '/avatar9.svg ',
+        '/avatar10.svg',
+        '/avatar11.svg',
+        '/avatar12.svg',
     ]
 
     const [menuCurrentAvatar, setMenuCurrentAvatar] = useState(9)
