@@ -5,6 +5,7 @@ import { ProjectList } from './ProjectList'
 import { Navigation } from './Navigation'
 import { Profile } from './Profile'
 import { History } from './History'
+import { TaskAdd } from './TaskAdd'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
@@ -79,6 +80,12 @@ function App() {
             : setHistory([[taskName, currentProjectName, taskState]])
     }
 
+    function deleteTask(taskName: string) {
+        const tasksForSet = tasks.filter((task) => task.name !== taskName)
+        setTasks(tasksForSet)
+        addToHistory(taskName, projects[currentProject].name, 'deleted')
+    }
+
     if (currentPage === PageType.Completed) {
         return (
             <div className="m-0 p-0">
@@ -97,15 +104,16 @@ function App() {
                     <TaskList
                         currentProject={projects[currentProject].name}
                         tasks={tasks.filter((task) => task.state)}
+                        deleteTask={deleteTask}
                     ></TaskList>
                 ) : (
-                    <p>No completed tasks</p>
+                    <p className="text-center">No completed tasks</p>
                 )}
             </div>
         )
     } else if (currentPage === PageType.Active) {
         return (
-            <div className="m-0 p-0">
+            <div className="flex h-screen flex-col">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
@@ -120,23 +128,6 @@ function App() {
                 <TaskList
                     currentProject={projects[currentProject]?.name}
                     tasks={tasks.filter((task) => !task?.state) || []}
-                    addTask={(taskName) => {
-                        if (!taskName) {
-                            return 'Please enter something to textspace'
-                        }
-                        addTask({
-                            name: taskName,
-                            state: false,
-                            value: 10,
-                        })
-                        addToHistory(
-                            taskName,
-                            projects[currentProject]?.name,
-                            'active'
-                        )
-                        return 'All ok'
-                    }}
-                    nukeTasks={() => setTasks([])}
                     completeTask={(taskName) => {
                         setTasks(
                             tasks.map((task) => {
@@ -155,19 +146,27 @@ function App() {
                             'completed'
                         )
                     }}
-                    deleteTask={(taskName) => {
-                        const tasksForSet = tasks.filter(
-                            (task) => task.name !== taskName
-                        )
-                        setTasks(tasksForSet)
+                    deleteTask={deleteTask}
+                />
+                <TaskAdd
+                    tasks={tasks}
+                    onAdd={(taskName) => {
+                        if (!taskName) {
+                            return 'Please enter something to textspace'
+                        }
+                        addTask({
+                            name: taskName,
+                            state: false,
+                            value: 10,
+                        })
                         addToHistory(
                             taskName,
-                            projects[currentProject].name,
-                            'deleted'
+                            projects[currentProject]?.name,
+                            'active'
                         )
+                        return 'All ok'
                     }}
-                    editable
-                ></TaskList>
+                />
             </div>
         )
     } else if (currentPage === PageType.Projects) {
