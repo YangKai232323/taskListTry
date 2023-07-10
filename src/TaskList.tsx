@@ -10,7 +10,7 @@ interface Props {
 
 export function TaskList({ tasks, deleteTask, completeTask }: Props) {
     return (
-        <ul className="overflow-auto">
+        <ul className="overflow-auto h-full">
             {tasks.map((task) => (
                 <li className="m-3 flex items-center justify-between rounded-lg px-3 py-1 shadow transition-all">
                     <p className="break-all">{task.name}</p>
