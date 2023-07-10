@@ -12,6 +12,13 @@ export function TaskAdd({ tasks, onAdd }: Props) {
 
     const [isValid, setIsValid] = useState(true)
 
+    function inputEnterPress(event: any): void {
+        if (event.key === 'Enter') {
+            onAdd?.(event.target.value)
+            setInputTaskName('')
+        }
+    }
+
     return (
         <div className="m-3 flex justify-between gap-3 rounded-xl shadow">
             <input
@@ -30,6 +37,7 @@ export function TaskAdd({ tasks, onAdd }: Props) {
                         setIsValid(true)
                     }
                 }}
+                onKeyDown={inputEnterPress}
             />
             {isValid ? (
                 <button

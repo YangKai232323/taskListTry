@@ -23,6 +23,13 @@ export function ProjectList({
 
     const [clickedProject, setClickedProject] = useState(-1)
 
+    function inputEnterPress(event: any): void {
+        if (event.key === 'Enter') {
+            addProject(inputProjectName)
+            setInputProjectName('')
+        }
+    }
+
     return (
         <div className="mt-2 rounded-xl border-2 border-gray-800 bg-slate-300 p-2">
             <Sort projects={projects}></Sort>
@@ -88,6 +95,7 @@ export function ProjectList({
                     onInput={(event: any) =>
                         setInputProjectName(event.target.value)
                     }
+                    onKeyDown={inputEnterPress}
                 />
                 <button
                     className="ml-2 flex h-10 w-10 items-center justify-center border-2 border-gray-700 p-0"
