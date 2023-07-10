@@ -4,53 +4,52 @@ import { PlusCircleIcon } from '@heroicons/react/24/outline'
 
 interface Props {
     tasks: Task[]
-    onAdd?(taskName: string): void
+    onAdd(taskName: string): void
 }
 
 export function TaskAdd({ tasks, onAdd }: Props) {
-    const [inputTaskName, setInputTaskName] = useState<string>('')
+    const [taskName, setTaskName] = useState<string>('')
 
-    const [isValid, setIsValid] = useState(true)
+    const [valid, setValid] = useState(true)
 
-    function inputEnterPress(event: any): void {
-        if (event.key === 'Enter') {
-            onAdd?.(event.target.value)
-            setInputTaskName('')
+    function addTask() {
+        if (!taskName) {
+            alert('Name is mandatory')
+        } else {
+            if (valid) {
+                onAdd(taskName)
+                setTaskName('')
+            }
         }
     }
 
     return (
         <div className="m-3 flex justify-between gap-3 rounded-xl shadow">
             <input
-                value={inputTaskName}
+                value={taskName}
                 id="taskInput"
                 className="h-12 w-full bg-transparent p-3 outline-none"
                 type="text"
                 placeholder="Name"
                 onInput={(event: any) => {
-                    setInputTaskName(event.target.value)
+                    setTaskName(event.target.value)
                     if (
                         tasks.find((task) => task.name === event.target.value)
                     ) {
-                        setIsValid(false)
+                        setValid(false)
                     } else {
-                        setIsValid(true)
+                        setValid(true)
                     }
                 }}
-                onKeyDown={inputEnterPress}
+                onKeyDown={(event: any) => {
+                    if (event.key === 'Enter') addTask()
+                }}
             />
-            {isValid ? (
+            {valid ? (
                 <button
                     type="button"
                     className="aspect-square h-12 scale-90 rounded-xl bg-emerald-400 p-3 text-white transition-all active:scale-75 active:bg-emerald-300 md:hover:bg-emerald-300"
-                    onClick={() => {
-                        if (!inputTaskName) {
-                            alert('Name is mandatory')
-                        } else {
-                            onAdd?.(inputTaskName)
-                            setInputTaskName('')
-                        }
-                    }}
+                    onClick={addTask}
                 >
                     <PlusCircleIcon />
                 </button>
