@@ -22,7 +22,7 @@ export function Navigation({
 }: Props) {
     if (currentPage === PageType.Projects) {
         return (
-            <div className="mt-3 flex w-screen gap-3 px-3">
+            <div className="mt-3 flex w-full gap-3 px-3">
                 <button
                     className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
                     onClick={() => {
@@ -50,7 +50,7 @@ export function Navigation({
 
     if (currentPage === PageType.Profile) {
         return (
-            <div className="mt-3 flex w-screen gap-3 px-3">
+            <div className="mt-3 flex w-full gap-3 px-3">
                 <button
                     className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
                     onClick={() => changeCurrentPage(PageType.Active)}
@@ -71,7 +71,7 @@ export function Navigation({
     }
 
     return (
-        <div className="mt-3 flex w-screen gap-3 px-3">
+        <div className="mt-3 flex w-full gap-3 px-3">
             <button
                 className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-sky-400 shadow"
                 onClick={() => changeCurrentPage(PageType.Projects)}

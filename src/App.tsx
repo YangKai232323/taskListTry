@@ -88,7 +88,7 @@ function App() {
 
     if (currentPage === PageType.Completed) {
         return (
-            <div className="text-lg">
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
@@ -113,7 +113,7 @@ function App() {
         )
     } else if (currentPage === PageType.Active) {
         return (
-            <div className="flex h-[100dvh] flex-col text-lg">
+            <div className="flex h-[100dvh] flex-col text-lg md:mx-auto md:w-max">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
@@ -171,7 +171,7 @@ function App() {
         )
     } else if (currentPage === PageType.Projects) {
         return (
-            <div className="text-lg">
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
@@ -208,7 +208,7 @@ function App() {
         )
     } else if (currentPage === PageType.Profile) {
         return (
-            <div className="text-lg">
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
@@ -230,7 +230,7 @@ function App() {
         )
     } else if (currentPage === PageType.History) {
         return (
-            <div className="text-lg">
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
                     lastPage={lastPage}
                     addLastPage={(page) => {
