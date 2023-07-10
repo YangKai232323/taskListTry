@@ -4,13 +4,20 @@ import { AvatarMenu } from './AvatarMenu'
 
 interface Props {
     projects: Project[]
+    avatar: number
+    setCurrentAvatar(id: number): void
     changeCurrentPage(currentPage: PageType): void
 }
 
-export function Profile({ projects, changeCurrentPage }: Props) {
+export function Profile({
+    projects,
+    changeCurrentPage,
+    avatar,
+    setCurrentAvatar,
+}: Props) {
     const [username, _setUsername] = useState('Uknown User')
 
-    const [currentAvatar, setCurrentAvatar] = useState(9)
+    // const [currentAvatar, setCurrentAvatar] = useState(9)
 
     const [isAvatarMenuVisible, setIsAvatarMenuVisible] =
         useState<boolean>(false)
@@ -50,7 +57,7 @@ export function Profile({ projects, changeCurrentPage }: Props) {
                 <div className="mx-4 flex items-center gap-4">
                     <img
                         onClick={() => setIsAvatarMenuVisible(true)}
-                        src={avatars[currentAvatar]}
+                        src={avatars[avatar]}
                         alt="avatar"
                         className=" h-24 w-24 rounded-[50%]"
                     />
@@ -58,8 +65,10 @@ export function Profile({ projects, changeCurrentPage }: Props) {
                 </div>
                 {isAvatarMenuVisible && (
                     <AvatarMenu
-                        currentAvatar={currentAvatar}
-                        setCurrentAvatar1={setCurrentAvatar}
+                        currentAvatar={avatar}
+                        setCurrentAvatar1={(id: number) => {
+                            setCurrentAvatar(id)
+                        }}
                         setIsVisible={setIsAvatarMenuVisible}
                     ></AvatarMenu>
                 )}

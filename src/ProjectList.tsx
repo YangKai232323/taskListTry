@@ -2,6 +2,7 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { Project } from './types'
 import { useState } from 'react'
 import { ProjectSwitchMenu } from './ProjectSwitchMenu'
+import { Sort } from './Sort'
 
 interface Props {
     projects: Project[]
@@ -24,6 +25,7 @@ export function ProjectList({
 
     return (
         <div className="mt-2 rounded-xl border-2 border-gray-800 bg-slate-300 p-2">
+            <Sort projects={projects}></Sort>
             <ul className="grid md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, projectId) => {
                     const numberOfCompletedTasks = project.tasks.filter(

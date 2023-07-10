@@ -12,6 +12,8 @@ function App() {
 
     const [projects, setInMemoryProjects] = useState<Project[]>([])
 
+    const [currentAvatar, setCurrentAvatar] = useState(9)
+
     function setProjects(projectList: Project[]): void {
         setInMemoryProjects(projectList)
         localStorage.setItem('projects', JSON.stringify(projectList))
@@ -60,6 +62,8 @@ function App() {
     }
 
     const [history, setHistory] = useState<any>([])
+
+    // const [curAvatar, setCurAvatar] = useState<number>(9)
 
     function addToHistory(
         taskName: string,
@@ -199,6 +203,8 @@ function App() {
                     }}
                 ></Navigation>
                 <Profile
+                    avatar={currentAvatar}
+                    setCurrentAvatar={setCurrentAvatar}
                     projects={projects}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
