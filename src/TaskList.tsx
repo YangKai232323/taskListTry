@@ -14,7 +14,7 @@ export function TaskList({ tasks, deleteTask, completeTask }: Props) {
             {tasks.map((task) => (
                 <li className="m-3 flex items-center justify-between rounded-lg px-3 py-1 shadow transition-all">
                     <p className="break-all">{task.name}</p>
-                    <div>
+                    <div className="min-w-fit">
                         {deleteTask && (
                             <button
                                 type="button"
