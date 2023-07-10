@@ -25,61 +25,61 @@ export function AvatarMenu({ setCurrentAvatar1, setIsVisible }: Props) {
     const [menuCurrentAvatar, setMenuCurrentAvatar] = useState(9)
 
     return (
-        <div className="bg-slate-200 rounded-3xl mx-2 p-2 flex-col gap-6 flex justify-center items-center">
-            <div className="grid grid-rows-3 grid-flow-col gap-6">
+        <div className="mx-2 flex flex-col items-center justify-center gap-6 rounded-3xl bg-slate-200 p-2">
+            <div className="grid grid-flow-col grid-rows-3 gap-6">
                 <img
                     onClick={() => setMenuCurrentAvatar(0)}
                     src={avatars[0]}
                     alt="avatar1"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(3)}
                     src={avatars[3]}
                     alt="avatar4"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(4)}
                     src={avatars[4]}
                     alt="avatar5"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(5)}
                     src={avatars[5]}
                     alt="avatar6"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(6)}
                     src={avatars[6]}
                     alt="avatar7"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(7)}
                     src={avatars[7]}
                     alt="avatar8"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(8)}
                     src={avatars[8]}
                     alt="avatar9"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(9)}
                     src={avatars[9]}
                     alt="avatar10"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(10)}
                     src={avatars[10]}
                     alt="avatar11"
-                    className="w-16 hover:border-4 hover:border-sky-700 rounded-[50%]"
+                    className="w-16 rounded-[50%] hover:border-4 hover:border-sky-700"
                 />
                 <img
                     onClick={() => setMenuCurrentAvatar(11)}

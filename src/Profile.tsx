@@ -46,15 +46,15 @@ export function Profile({ projects, changeCurrentPage }: Props) {
 
     return (
         <>
-            <div className="flex flex-col gap-4 mt-4">
-                <div className="flex mx-4 items-center gap-4">
+            <div className="mt-4 flex flex-col gap-4">
+                <div className="mx-4 flex items-center gap-4">
                     <img
                         onClick={() => setIsAvatarMenuVisible(true)}
                         src={avatars[currentAvatar]}
                         alt="avatar"
-                        className=" w-24 h-24 rounded-[50%]"
+                        className=" h-24 w-24 rounded-[50%]"
                     />
-                    <h3 className="font-bold text-2xl break-all">{username}</h3>
+                    <h3 className="break-all text-2xl font-bold">{username}</h3>
                 </div>
                 {isAvatarMenuVisible && (
                     <AvatarMenu
@@ -63,7 +63,7 @@ export function Profile({ projects, changeCurrentPage }: Props) {
                         setIsVisible={setIsAvatarMenuVisible}
                     ></AvatarMenu>
                 )}
-                <div className="flex flex-col ml-4 gap-1 items-center">
+                <div className="ml-4 flex flex-col items-center gap-1">
                     <h2 className="font- bold">
                         {countLevel(currentExp)} Level
                     </h2>

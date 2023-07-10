@@ -12,15 +12,15 @@ export function ProjectSwitchMenu({
     close,
 }: Props) {
     return (
-        <div className="flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-2 p-2 bg-slate-300 rounded-md">
+        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform gap-2 rounded-md bg-slate-300 p-2">
             <button
-                className="bg-slate-400 p-2 rounded-md hover:bg-slate-300 transition-all hover:shadow-lg font-semibold"
+                className="rounded-md bg-slate-400 p-2 font-semibold transition-all hover:bg-slate-300 hover:shadow-lg"
                 onClick={() => close()}
             >
                 Cancel
             </button>
             <button
-                className="bg-red-400 p-2 rounded-md hover:bg-red-300 transition-all hover:shadow-lg font-semibold"
+                className="rounded-md bg-red-400 p-2 font-semibold transition-all hover:bg-red-300 hover:shadow-lg"
                 onClick={() => {
                     deleteProject(projectId)
                     close()
@@ -29,7 +29,7 @@ export function ProjectSwitchMenu({
                 Delete
             </button>
             <button
-                className="bg-emerald-400 p-2 rounded-md hover:bg-emerald-300 transition-all hover:shadow-lg font-semibold"
+                className="rounded-md bg-emerald-400 p-2 font-semibold transition-all hover:bg-emerald-300 hover:shadow-lg"
                 onClick={() => {
                     enterProject(projectId)
                     close()
