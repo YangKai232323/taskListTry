@@ -59,7 +59,7 @@ export function Profile({
                         onClick={() => setIsAvatarMenuVisible(true)}
                         src={avatars[avatar]}
                         alt="avatar"
-                        className=" h-24 w-24 rounded-[50%]"
+                        className="h-24 w-24 rounded-full"
                     />
                     <h3 className="break-all text-2xl font-bold">{username}</h3>
                 </div>
@@ -70,7 +70,7 @@ export function Profile({
                             setCurrentAvatar(id)
                         }}
                         setIsVisible={setIsAvatarMenuVisible}
-                    ></AvatarMenu>
+                    />
                 )}
                 <div className="ml-4 flex flex-col items-center gap-1">
                     <h2 className="font- bold">
