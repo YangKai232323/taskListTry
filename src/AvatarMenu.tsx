@@ -1,12 +1,9 @@
-import { useState } from 'react'
-
 interface Props {
     currentAvatar: number
-    setCurrentAvatar1(avatarId: number): void
-    setIsVisible(is: boolean): void
+    onUpdate(avatarId: number): void
 }
 
-export function AvatarMenu({ setCurrentAvatar1, setIsVisible }: Props) {
+export function AvatarMenu({ currentAvatar, onUpdate }: Props) {
     const avatars: string[] = [
         '/avatar1.svg',
         '/avatar2.svg',
@@ -22,83 +19,90 @@ export function AvatarMenu({ setCurrentAvatar1, setIsVisible }: Props) {
         '/avatar12.svg',
     ]
 
-    const [menuCurrentAvatar, setMenuCurrentAvatar] = useState(9)
-
     return (
         <div className="mx-2 flex flex-col items-center justify-center gap-6 rounded-3xl bg-slate-200 p-2">
             <div className="grid grid-flow-col grid-rows-3 gap-6">
                 <img
-                    onClick={() => setMenuCurrentAvatar(0)}
+                    onClick={() => onUpdate(0)}
                     src={avatars[0]}
                     alt="avatar1"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 0 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(3)}
+                    onClick={() => onUpdate(3)}
                     src={avatars[3]}
                     alt="avatar4"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 3 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(4)}
+                    onClick={() => onUpdate(4)}
                     src={avatars[4]}
                     alt="avatar5"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 4 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(5)}
+                    onClick={() => onUpdate(5)}
                     src={avatars[5]}
                     alt="avatar6"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 5 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(6)}
+                    onClick={() => onUpdate(6)}
                     src={avatars[6]}
                     alt="avatar7"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 6 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(7)}
+                    onClick={() => onUpdate(7)}
                     src={avatars[7]}
                     alt="avatar8"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 7 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(8)}
+                    onClick={() => onUpdate(8)}
                     src={avatars[8]}
                     alt="avatar9"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 8 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(9)}
+                    onClick={() => onUpdate(9)}
                     src={avatars[9]}
                     alt="avatar10"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 9 ? 'shadow' : 'grayscale')
+                    }
                 />
                 <img
-                    onClick={() => setMenuCurrentAvatar(10)}
+                    onClick={() => onUpdate(10)}
                     src={avatars[10]}
                     alt="avatar11"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700"
+                    className={
+                        'w-16 rounded-full transition-all ' +
+                        (currentAvatar === 10 ? 'shadow' : 'grayscale')
+                    }
                 />
-                <img
-                    onClick={() => setMenuCurrentAvatar(11)}
-                    src={avatars[11]}
-                    alt="avatar12"
-                    className="w-16 rounded-full hover:border-4 hover:border-sky-700 "
-                />
-                <button
-                    className="rounded-full bg-emerald-300"
-                    onClick={() => setCurrentAvatar1(menuCurrentAvatar)}
-                >
-                    Save
-                </button>
-                <button
-                    className="rounded-full bg-slate-400"
-                    onClick={() => setIsVisible(false)}
-                >
-                    Back
-                </button>
             </div>
         </div>
     )

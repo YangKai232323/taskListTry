@@ -17,3 +17,9 @@ export enum PageType {
     Profile = 'profile',
     History = 'history',
 }
+
+export enum SortBy {
+    Alphabetically = 'alpha',
+    AmountOfTasks = 'tasks',
+    Completeness = 'completness',
+}

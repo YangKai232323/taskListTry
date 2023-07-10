@@ -17,8 +17,6 @@ export function Profile({
 }: Props) {
     const [username, _setUsername] = useState('Uknown User')
 
-    // const [currentAvatar, setCurrentAvatar] = useState(9)
-
     const [isAvatarMenuVisible, setIsAvatarMenuVisible] =
         useState<boolean>(false)
 
@@ -56,20 +54,21 @@ export function Profile({
             <div className="mt-4 flex flex-col gap-4">
                 <div className="mx-4 flex items-center gap-4">
                     <img
-                        onClick={() => setIsAvatarMenuVisible(true)}
+                        onClick={() =>
+                            setIsAvatarMenuVisible(!isAvatarMenuVisible)
+                        }
                         src={avatars[avatar]}
                         alt="avatar"
-                        className="h-24 w-24 rounded-full"
+                        className="h-24 w-24 cursor-pointer rounded-full"
                     />
                     <h3 className="break-all text-2xl font-bold">{username}</h3>
                 </div>
                 {isAvatarMenuVisible && (
                     <AvatarMenu
                         currentAvatar={avatar}
-                        setCurrentAvatar1={(id: number) => {
+                        onUpdate={(id: number) => {
                             setCurrentAvatar(id)
                         }}
-                        setIsVisible={setIsAvatarMenuVisible}
                     />
                 )}
                 <div className="ml-4 flex flex-col items-center gap-1">

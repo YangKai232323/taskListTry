@@ -1,4 +1,4 @@
-import { Project } from './types'
+import { Project, SortBy } from './types'
 import { useState } from 'react'
 
 interface Props {
@@ -6,11 +6,11 @@ interface Props {
 }
 
 export function Sort({ projects: _projects }: Props) {
-    const [sortState, setSortState] = useState<string>('projects')
+    const [sortState, setSortState] = useState('projects')
 
-    const [_sortBy, setSortBy] = useState<string>('complete percents')
+    const [_sortBy, setSortBy] = useState('complete percents')
 
-    const [sortBtnsVisibility, setSortBtnsVisibility] = useState<boolean>(false)
+    const [buttonVisibility, setButtonVisibility] = useState(false)
 
     return (
         <div>
@@ -38,27 +38,27 @@ export function Sort({ projects: _projects }: Props) {
                         <button
                             id="sortSelector"
                             onClick={() => {
-                                if (sortBtnsVisibility === false) {
-                                    setSortBtnsVisibility(true)
+                                if (buttonVisibility === false) {
+                                    setButtonVisibility(true)
                                 } else {
-                                    setSortBtnsVisibility(false)
+                                    setButtonVisibility(false)
                                 }
                             }}
                         >
                             Complete Percents
                         </button>
-                        {sortBtnsVisibility && (
+                        {buttonVisibility && (
                             <>
                                 <button
                                     onClick={() => {
-                                        setSortBy('number of tasks')
+                                        setSortBy(SortBy.AmountOfTasks)
                                     }}
                                 >
                                     Number of tasks
                                 </button>
                                 <button
                                     onClick={() => {
-                                        setSortBy('alphabet')
+                                        setSortBy(SortBy.Alphabetically)
                                     }}
                                 >
                                     Alphabet
