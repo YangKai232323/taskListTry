@@ -57,7 +57,7 @@ export function TaskList({
                     <input
                         value={inputTaskName}
                         id="taskInput"
-                        className="text-2xl p-1 m-1 ml-3 rounded-lg border-slate-500 border-4 items-center justify-center flex mt-4 w-72"
+                        className="text-2xl p-1 m-1 ml-3 rounded-lg border-slate-500 border-4 items-center justify-center flex mt-4 w-60"
                         type="text"
                         placeholder="Enter task name"
                         onInput={(event: any) => {
