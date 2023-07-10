@@ -55,7 +55,7 @@ export function TaskList({
                 ))}
             </ul>
             {editable && (
-                <div className="fixed bottom-0 w-full p-3">
+                <div className="fixed bottom-0 w-full p-3 bg-white">
                     <div className="flex justify-between gap-3 rounded-lg shadow">
                         <input
                             value={inputTaskName}
