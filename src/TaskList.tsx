@@ -28,8 +28,8 @@ export function TaskList({
     const [isValid, setIsValid] = useState(true)
 
     return (
-        <div className="">
-            <ul className="text-lg">
+        <div className="relative">
+            <ul className="text-lg overflow-auto">
                 {tasks.map((task) => (
                     <li className="m-3 flex items-center justify-between rounded-lg px-3 py-1 shadow transition-all">
                         <p className="break-all">{task.name}</p>
@@ -55,7 +55,7 @@ export function TaskList({
                 ))}
             </ul>
             {editable && (
-                <div className="fixed bottom-0 w-full p-3 bg-white">
+                <div className="absolute bottom-0 w-full p-3 bg-white">
                     <div className="flex justify-between gap-3 rounded-lg shadow">
                         <input
                             value={inputTaskName}
