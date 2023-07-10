@@ -12,7 +12,7 @@ export function TaskList({ tasks, deleteTask, completeTask }: Props) {
     return (
         <ul className="h-full overflow-auto">
             {tasks.map((task) => (
-                <li className="m-3 flex items-center justify-between rounded-lg px-3 py-1 shadow transition-all">
+                <li className="m-3 flex items-center justify-between rounded-xl px-3 py-1 shadow transition-all">
                     <p className="break-all">{task.name}</p>
                     <div className="min-w-fit">
                         {deleteTask && (

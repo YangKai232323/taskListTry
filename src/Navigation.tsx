@@ -21,7 +21,7 @@ export function Navigation({
         return (
             <div className="mt-3 flex w-full gap-3 px-3">
                 <button
-                    className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-emerald-400 shadow"
                     onClick={() => {
                         changeCurrentPage(PageType.Active)
                         addLastPage(PageType.Active)
@@ -29,11 +29,11 @@ export function Navigation({
                 >
                     <ListBulletIcon className="h-8" />
                 </button>
-                <p className="flex h-12 w-full items-center justify-center rounded-lg bg-sky-300 text-black shadow">
+                <p className="flex h-12 w-full items-center justify-center rounded-xl bg-sky-300 text-black shadow">
                     Projects
                 </p>
                 <button
-                    className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-amber-400 shadow"
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-amber-400 shadow"
                     onClick={() => {
                         changeCurrentPage(PageType.Profile)
                         addLastPage(PageType.Profile)
@@ -49,16 +49,16 @@ export function Navigation({
         return (
             <div className="mt-3 flex w-full gap-3 px-3">
                 <button
-                    className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-emerald-400 shadow"
                     onClick={() => changeCurrentPage(PageType.Active)}
                 >
                     <ListBulletIcon className="h-8" />
                 </button>
-                <p className="flex h-12 w-full items-center justify-center rounded-lg bg-amber-300 text-black shadow">
+                <p className="flex h-12 w-full items-center justify-center rounded-xl bg-amber-300 text-black shadow">
                     Profile
                 </p>
                 <button
-                    className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-sky-400 shadow"
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-sky-400 shadow"
                     onClick={() => changeCurrentPage(PageType.Projects)}
                 >
                     <FolderIcon className="h-8" />
@@ -70,7 +70,7 @@ export function Navigation({
     return (
         <div className="mt-3 flex w-full gap-3 px-3">
             <button
-                className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-sky-400 shadow"
+                className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-sky-400 shadow"
                 onClick={() => changeCurrentPage(PageType.Projects)}
             >
                 <FolderIcon className="h-8" />
@@ -78,8 +78,8 @@ export function Navigation({
             <button
                 className={
                     currentPage === PageType.Active
-                        ? 'h-12 w-full rounded-lg bg-emerald-400 text-white shadow'
-                        : 'h-12 w-full rounded-lg bg-white text-emerald-400 shadow'
+                        ? 'h-12 w-full rounded-xl bg-emerald-400 text-white shadow'
+                        : 'h-12 w-full rounded-xl bg-white text-emerald-400 shadow'
                 }
                 onClick={() => {
                     changeCurrentPage(PageType.Active)
@@ -91,8 +91,8 @@ export function Navigation({
             <button
                 className={
                     currentPage === PageType.Completed
-                        ? 'h-12 w-full rounded-lg bg-red-400 text-black shadow'
-                        : 'h-12 w-full rounded-lg bg-white text-red-400 shadow'
+                        ? 'h-12 w-full rounded-xl bg-red-400 text-black shadow'
+                        : 'h-12 w-full rounded-xl bg-white text-red-400 shadow'
                 }
                 onClick={() => {
                     changeCurrentPage(PageType.Completed)

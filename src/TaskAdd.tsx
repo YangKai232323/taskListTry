@@ -13,7 +13,7 @@ export function TaskAdd({ tasks, onAdd }: Props) {
     const [isValid, setIsValid] = useState(true)
 
     return (
-        <div className="m-3 flex justify-between gap-3 rounded-lg shadow">
+        <div className="m-3 flex justify-between gap-3 rounded-xl shadow">
             <input
                 value={inputTaskName}
                 id="taskInput"
@@ -34,7 +34,7 @@ export function TaskAdd({ tasks, onAdd }: Props) {
             {isValid ? (
                 <button
                     type="button"
-                    className="aspect-square h-12 scale-90 rounded-lg bg-emerald-400 p-3 text-white transition-all active:scale-75 active:bg-emerald-300 md:hover:bg-emerald-300"
+                    className="aspect-square h-12 scale-90 rounded-xl bg-emerald-400 p-3 text-white transition-all active:scale-75 active:bg-emerald-300 md:hover:bg-emerald-300"
                     onClick={() => {
                         if (!inputTaskName) {
                             alert('Name is mandatory')
@@ -47,7 +47,7 @@ export function TaskAdd({ tasks, onAdd }: Props) {
                     <PlusCircleIcon />
                 </button>
             ) : (
-                <p className="flex w-fit items-center justify-center whitespace-nowrap rounded-lg bg-red-400 px-2 font-bold text-white">
+                <p className="flex w-fit items-center justify-center whitespace-nowrap rounded-xl bg-red-400 px-2 font-bold text-white">
                     Name's taken
                 </p>
             )}
