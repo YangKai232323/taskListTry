@@ -1,7 +1,6 @@
 import { Task } from './types'
 import { useState } from 'react'
-import { CheckIcon } from '@heroicons/react/24/outline'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import { CheckCircleIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 interface Props {
     tasks: Task[]
@@ -18,7 +17,6 @@ export function TaskList({
     addTask,
     deleteTask,
     completeTask,
-    nukeTasks,
     editable,
 }: Props) {
     const [inputTaskName, setInputTaskName] = useState<string>('')
@@ -26,83 +24,79 @@ export function TaskList({
     const [isValid, setIsValid] = useState(true)
 
     return (
-        <div className="rounded-2xl border-neutral-500 bg-zinc-300 border-8 m-4">
-            <ul className="border-slate-400">
+        <div className="">
+            <ul className="text-lg">
                 {tasks.map((task) => (
-                    <li className="rounded-xl font-bold m-4 text-2xl p-2 border-gray-500 border-4 flex items-center">
+                    <li className="rounded-lg m-3 px-3 py-1 shadow transition-all flex items-center justify-between">
                         <p className="break-all">{task.name}</p>
                         {editable && (
-                            <>
+                            <div>
                                 <button
                                     type="button"
-                                    className="text-3xl border-black border-2 m-2"
-                                    onClick={() => completeTask?.(task.name)}
-                                >
-                                    <CheckIcon className="w-7 h-7" />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="text-3xl border-black border-2 m-2"
+                                    className="m-2 mx-1"
                                     onClick={() => deleteTask?.(task.name)}
                                 >
-                                    <XMarkIcon className="w-7 h-7" />
+                                    <TrashIcon className="w-7 h-7 text-red-400" />
                                 </button>
-                            </>
+                                <button
+                                    type="button"
+                                    className="m-2 mr-0"
+                                    onClick={() => completeTask?.(task.name)}
+                                >
+                                    <CheckCircleIcon className="w-7 h-7 text-emerald-400" />
+                                </button>
+                            </div>
                         )}
                     </li>
                 ))}
             </ul>
             {editable && (
-                <>
-                    <input
-                        value={inputTaskName}
-                        id="taskInput"
-                        className="text-2xl p-1 m-1 ml-3 rounded-lg border-slate-500 border-4 items-center justify-center flex mt-4 w-72"
-                        type="text"
-                        placeholder="Enter task name"
-                        onInput={(event: any) => {
-                            setInputTaskName(event.target.value)
-                            if (
-                                tasks.find(
-                                    (task) => task.name === event.target.value
-                                )
-                            ) {
-                                setIsValid(false)
-                            } else {
-                                setIsValid(true)
-                            }
-                        }}
-                    />
+                <div className="p-3 fixed bottom-0 w-full">
+                    <div className="flex justify-between gap-3 shadow rounded-lg">
+                        <input
+                            value={inputTaskName}
+                            id="taskInput"
+                            className="h-12 p-3 bg-transparent w-full outline-none"
+                            type="text"
+                            placeholder="Name"
+                            onInput={(event: any) => {
+                                setInputTaskName(event.target.value)
+                                if (
+                                    tasks.find(
+                                        (task) => task.name === event.target.value
+                                    )
+                                ) {
+                                    setIsValid(false)
+                                } else {
+                                    setIsValid(true)
+                                }
+                            }}
+                        />
+                        {isValid ? (
+                            <button
+                                type="button"
+                                className="h-12 aspect-square rounded-lg text-white bg-emerald-400 p-3 scale-90 active:scale-75 active:bg-emerald-300 md:hover:bg-emerald-300 transition-all"
+                                onClick={() => {
+                                    if (!inputTaskName) {
+                                        alert(
+                                            'Name is mandatory'
+                                        )
+                                    } else {
+                                        addTask?.(inputTaskName)
+                                        setInputTaskName('')
+                                    }
+                                }}
+                            >
+                                <PlusCircleIcon />
+                            </button>
+                        ) : (
+                            <p className="flex justify-center items-center rounded-lg px-2 w-fit text-white bg-red-400 font-bold whitespace-nowrap">
+                                Name's taken
+                            </p>
+                        )}
 
-                    {isValid || (
-                        <p className="text-center text-red-600 font-bold">
-                            This task name is already taken
-                        </p>
-                    )}
-
-                    <button
-                        type="button"
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4 mr-0"
-                        onClick={() => {
-                            if (!inputTaskName) {
-                                alert('Please, enter something before add task')
-                            } else {
-                                addTask?.(inputTaskName)
-                                setInputTaskName('')
-                            }
-                        }}
-                    >
-                        Add Task
-                    </button>
-
-                    <button
-                        type="button"
-                        className="font-bold m-4 text-xl bg-green-200 p-1 border-green-700 border-4"
-                        onClick={nukeTasks}
-                    >
-                        Delete All Tasks
-                    </button>
-                </>
+                    </div>
+                </div>
             )}
         </div>
     )

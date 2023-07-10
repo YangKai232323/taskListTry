@@ -18,7 +18,7 @@ export function ProjectList({
 }: Props) {
     const [inputProjectName, setInputProjectName] = useState('')
 
-    const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const [showMenu, setIsMenuVisible] = useState(false)
 
     const [clickedProject, setClickedProject] = useState(-1)
 
@@ -63,7 +63,8 @@ export function ProjectList({
                     )
                 })}
             </ul>
-            {isMenuVisible && (
+
+            {showMenu && (
                 <ProjectSwitchMenu
                     projectId={clickedProject}
                     close={() => setIsMenuVisible(false)}
@@ -75,6 +76,7 @@ export function ProjectList({
                     }
                 ></ProjectSwitchMenu>
             )}
+
             <div className="flex p-4">
                 <input
                     type="text"
