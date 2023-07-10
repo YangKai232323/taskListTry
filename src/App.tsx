@@ -113,7 +113,7 @@ function App() {
         )
     } else if (currentPage === PageType.Active) {
         return (
-            <div className="flex h-screen flex-col">
+            <div className="flex h-[100dvh] flex-col">
                 <Navigation
                     addLastPage={(page) => {
                         addLastPage(page)
