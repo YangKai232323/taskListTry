@@ -8,7 +8,6 @@ import { PageType } from './types'
 interface Props {
     currentPage: PageType
     changeCurrentPage(currentPage: PageType): void
-    lastPage: PageType[]
 
     addLastPage(page: PageType): void
 }
@@ -16,8 +15,6 @@ interface Props {
 export function Navigation({
     currentPage,
     changeCurrentPage,
-    lastPage,
-
     addLastPage,
 }: Props) {
     if (currentPage === PageType.Projects) {
