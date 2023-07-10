@@ -19,12 +19,12 @@ export function ProjectList({
 }: Props) {
     const [inputProjectName, setInputProjectName] = useState('')
 
-    const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const [showMenu, setIsMenuVisible] = useState(false)
 
     const [clickedProject, setClickedProject] = useState(-1)
 
     return (
-        <div className="bg-slate-300 border-2 border-gray-800 rounded-xl p-2 mt-2">
+        <div className="mt-2 rounded-xl border-2 border-gray-800 bg-slate-300 p-2">
             <Sort projects={projects}></Sort>
             <ul className="grid md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, projectId) => {
@@ -36,16 +36,16 @@ export function ProjectList({
 
                     return (
                         <li
-                            className="flex flex-col bg-slate-200 border-2 border-gray-800 items-center m-3 hover:cursor-pointer hover:shadow-lg hover:shadow-slate-500 transition-all "
+                            className="m-3 flex flex-col items-center border-2 border-gray-800 bg-slate-200 transition-all hover:cursor-pointer hover:shadow-lg hover:shadow-slate-500 "
                             onClick={() => {
                                 setClickedProject(projectId)
                                 setIsMenuVisible(true)
                             }}
                         >
-                            <h3 className="mt-2 font-bold break-all">
+                            <h3 className="mt-2 break-all font-bold">
                                 {project.name}
                             </h3>
-                            <div className="flex gap-2 items-center m-3">
+                            <div className="m-3 flex items-center gap-2">
                                 <progress
                                     className="mt-2"
                                     value={
@@ -65,7 +65,8 @@ export function ProjectList({
                     )
                 })}
             </ul>
-            {isMenuVisible && (
+
+            {showMenu && (
                 <ProjectSwitchMenu
                     projectId={clickedProject}
                     close={() => setIsMenuVisible(false)}
@@ -77,24 +78,25 @@ export function ProjectList({
                     }
                 ></ProjectSwitchMenu>
             )}
+
             <div className="flex p-4">
                 <input
                     type="text"
                     placeholder="Enter project name"
                     value={inputProjectName}
-                    className="h-10 w-full bg-slate-300 hover:bg-gray-200 focus:bg-gray-200 outline-none px-2"
+                    className="h-10 w-full bg-slate-300 px-2 outline-none hover:bg-gray-200 focus:bg-gray-200"
                     onInput={(event: any) =>
                         setInputProjectName(event.target.value)
                     }
                 />
                 <button
-                    className="w-10 h-10 ml-2 border-2 border-gray-700 p-0 flex items-center justify-center"
+                    className="ml-2 flex h-10 w-10 items-center justify-center border-2 border-gray-700 p-0"
                     onClick={() => {
                         addProject(inputProjectName)
                         setInputProjectName('')
                     }}
                 >
-                    <PlusIcon className="w-10 h-10 m-0"> </PlusIcon>
+                    <PlusIcon className="m-0 h-10 w-10"> </PlusIcon>
                 </button>
             </div>
         </div>

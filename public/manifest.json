@@ -1,0 +1,16 @@
+{
+    "short_name": "TLT",
+    "name": "Task List Try",
+    "icons": [
+        {
+            "src": "/vite.svg",
+            "type": "image/svg+xml",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "display": "standalone",
+    "description": "Task List app by Yang Kai"
+}

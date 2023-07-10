@@ -5,6 +5,7 @@ import { ProjectList } from './ProjectList'
 import { Navigation } from './Navigation'
 import { Profile } from './Profile'
 import { History } from './History'
+import { TaskAdd } from './TaskAdd'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
@@ -39,12 +40,6 @@ function App() {
     }, [])
 
     const [currentProject, setProject] = useState<number>(0)
-
-    const [lastPage, setLastPage] = useState<PageType[]>([PageType.Active])
-
-    function addLastPage(page: PageType): void {
-        setLastPage([...lastPage, page])
-    }
 
     const tasks = (projects[currentProject]?.tasks as Task[]) || []
 
@@ -83,15 +78,17 @@ function App() {
             : setHistory([[taskName, currentProjectName, taskState]])
     }
 
+    function deleteTask(taskName: string) {
+        const tasksForSet = tasks.filter((task) => task.name !== taskName)
+        setTasks(tasksForSet)
+        addToHistory(taskName, projects[currentProject].name, 'deleted')
+    }
+
     if (currentPage === PageType.Completed) {
         return (
-            <div className="m-0 p-0">
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
-                    addLastPage={(page) => {
-                        addLastPage(page)
-                        console.log(page)
-                    }}
-                    lastPage={lastPage}
+                    addLastPage={(page) => console.log(page)}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
@@ -101,46 +98,26 @@ function App() {
                     <TaskList
                         currentProject={projects[currentProject].name}
                         tasks={tasks.filter((task) => task.state)}
+                        deleteTask={deleteTask}
                     ></TaskList>
                 ) : (
-                    <p>No completed tasks</p>
+                    <p className="text-center">No completed tasks</p>
                 )}
             </div>
         )
     } else if (currentPage === PageType.Active) {
         return (
-            <div className="p-0 m-0">
+            <div className="flex h-[100dvh] flex-col text-lg md:mx-auto md:w-max">
                 <Navigation
-                    addLastPage={(page) => {
-                        addLastPage(page)
-                        console.log(page)
-                    }}
+                    addLastPage={(page) => console.log(page)}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
                     }}
-                    lastPage={lastPage}
                 ></Navigation>
                 <TaskList
                     currentProject={projects[currentProject]?.name}
                     tasks={tasks.filter((task) => !task?.state) || []}
-                    addTask={(taskName) => {
-                        if (!taskName) {
-                            return 'Please enter something to textspace'
-                        }
-                        addTask({
-                            name: taskName,
-                            state: false,
-                            value: 10,
-                        })
-                        addToHistory(
-                            taskName,
-                            projects[currentProject]?.name,
-                            'active'
-                        )
-                        return 'All ok'
-                    }}
-                    nukeTasks={() => setTasks([])}
                     completeTask={(taskName) => {
                         setTasks(
                             tasks.map((task) => {
@@ -159,30 +136,34 @@ function App() {
                             'completed'
                         )
                     }}
-                    deleteTask={(taskName) => {
-                        const tasksForSet = tasks.filter(
-                            (task) => task.name !== taskName
-                        )
-                        setTasks(tasksForSet)
+                    deleteTask={deleteTask}
+                />
+                <TaskAdd
+                    tasks={tasks}
+                    onAdd={(taskName) => {
+                        if (!taskName) {
+                            return 'Please enter something to textspace'
+                        }
+                        addTask({
+                            name: taskName,
+                            state: false,
+                            value: 10,
+                        })
                         addToHistory(
                             taskName,
-                            projects[currentProject].name,
-                            'deleted'
+                            projects[currentProject]?.name,
+                            'active'
                         )
+                        return 'All ok'
                     }}
-                    editable
-                ></TaskList>
+                />
             </div>
         )
     } else if (currentPage === PageType.Projects) {
         return (
-            <div>
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
-                    addLastPage={(page) => {
-                        addLastPage(page)
-                        console.log(page)
-                    }}
-                    lastPage={lastPage}
+                    addLastPage={(page) => console.log(page)}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
@@ -213,13 +194,9 @@ function App() {
         )
     } else if (currentPage === PageType.Profile) {
         return (
-            <div>
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
-                    addLastPage={(page) => {
-                        addLastPage(page)
-                        console.log(page)
-                    }}
-                    lastPage={lastPage}
+                    addLastPage={(page) => console.log(page)}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)
@@ -237,13 +214,9 @@ function App() {
         )
     } else if (currentPage === PageType.History) {
         return (
-            <div>
+            <div className="text-lg md:mx-auto md:w-max">
                 <Navigation
-                    lastPage={lastPage}
-                    addLastPage={(page) => {
-                        addLastPage(page)
-                        console.log(page)
-                    }}
+                    addLastPage={(page) => console.log(page)}
                     currentPage={currentPage}
                     changeCurrentPage={(currentPage) => {
                         setCurrentPage(currentPage)

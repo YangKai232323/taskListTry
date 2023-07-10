@@ -1,3 +1,5 @@
 procs:
   server: "npm run dev"
-  shell: "powershell"
+  shell: "bash"
+
+proc_list_width: 16

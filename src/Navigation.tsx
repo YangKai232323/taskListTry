@@ -1,10 +1,13 @@
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+import {
+    FolderIcon,
+    ListBulletIcon,
+    UserIcon,
+} from '@heroicons/react/24/outline'
 import { PageType } from './types'
 
 interface Props {
     currentPage: PageType
     changeCurrentPage(currentPage: PageType): void
-    lastPage: PageType[]
 
     addLastPage(page: PageType): void
 }
@@ -12,85 +15,92 @@ interface Props {
 export function Navigation({
     currentPage,
     changeCurrentPage,
-    lastPage,
-
     addLastPage,
 }: Props) {
-    return (
-        <div className="mt-2 w-screen px-2">
-            <div className="flex justify-between gap-2">
-                <div className="flex">
-                    <button
-                        className="w-12 h-12"
-                        onClick={() => {
-                            const length = lastPage.length - 2
-                            if (lastPage) {
-                                console.log(lastPage[length])
-                                console.log(lastPage)
-                                changeCurrentPage(lastPage[length])
-                            } else {
-                                changeCurrentPage(PageType.Active)
-                            }
-                        }}
-                    >
-                        <ArrowLeftIcon className="w-12 h-12"></ArrowLeftIcon>
-                    </button>
-                </div>
+    if (currentPage === PageType.Projects) {
+        return (
+            <div className="mt-3 flex w-full gap-3 px-3">
                 <button
-                    className={
-                        currentPage === PageType.Active
-                            ? 'font-semi-bold text-xl bg-green-400 p-1 border-green-700 border-4 w-full rounded-md'
-                            : 'font-semi-bold text-xl bg-green-200 p-1 border-green-200 border-4 w-full rounded-md'
-                    }
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-emerald-400 shadow"
                     onClick={() => {
                         changeCurrentPage(PageType.Active)
                         addLastPage(PageType.Active)
                     }}
                 >
-                    Active
+                    <ListBulletIcon className="h-8" />
                 </button>
-                <button
-                    className={
-                        currentPage === PageType.Completed
-                            ? 'font-semi-bold text-xl bg-red-300 p-1 border-red-500 border-4 w-full rounded-md'
-                            : 'font-semi-bold text-xl bg-red-100 p-1 border-red-100 border-4 w-full rounded-md'
-                    }
-                    onClick={() => {
-                        changeCurrentPage(PageType.Completed)
-                        addLastPage(PageType.Completed)
-                    }}
-                >
-                    Completed
-                </button>
-            </div>
-            <div className="flex justify-between gap-2 pt-2">
-                <button
-                    className={
-                        currentPage === PageType.Projects
-                            ? 'font-semi-bold text-xl bg-sky-300 p-1 border-sky-500 border-4 w-full rounded-md'
-                            : 'font-semi-bold text-xl bg-sky-100 p-1 border-sky-100 border-4 w-full rounded-md'
-                    }
-                    onClick={() => {
-                        changeCurrentPage(PageType.Projects)
-                        addLastPage(PageType.Projects)
-                    }}
-                >
+                <p className="flex h-12 w-full items-center justify-center rounded-xl bg-sky-300 text-black shadow">
                     Projects
-                </button>
+                </p>
                 <button
-                    className={
-                        currentPage === PageType.Profile
-                            ? 'font-semi-bold text-xl bg-orange-300 p-1 border-orange-500 border-4 w-full rounded-md'
-                            : 'font-semi-bold text-xl bg-orange-100 p-1 border-orange-100 border-4 w-full rounded-md'
-                    }
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-amber-400 shadow"
                     onClick={() => {
                         changeCurrentPage(PageType.Profile)
                         addLastPage(PageType.Profile)
                     }}
                 >
-                    Profile
+                    <UserIcon className="h-8" />
                 </button>
             </div>
+        )
+    }
+
+    if (currentPage === PageType.Profile) {
+        return (
+            <div className="mt-3 flex w-full gap-3 px-3">
+                <button
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-emerald-400 shadow"
+                    onClick={() => changeCurrentPage(PageType.Active)}
+                >
+                    <ListBulletIcon className="h-8" />
+                </button>
+                <p className="flex h-12 w-full items-center justify-center rounded-xl bg-amber-300 text-black shadow">
+                    Profile
+                </p>
+                <button
+                    className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-sky-400 shadow"
+                    onClick={() => changeCurrentPage(PageType.Projects)}
+                >
+                    <FolderIcon className="h-8" />
+                </button>
+            </div>
+        )
+    }
+
+    return (
+        <div className="mt-3 flex w-full gap-3 px-3">
+            <button
+                className="flex aspect-square h-12 items-center justify-center rounded-xl bg-white text-sky-400 shadow"
+                onClick={() => changeCurrentPage(PageType.Projects)}
+            >
+                <FolderIcon className="h-8" />
+            </button>
+            <button
+                className={
+                    currentPage === PageType.Active
+                        ? 'h-12 w-full rounded-xl bg-emerald-400 text-white shadow'
+                        : 'h-12 w-full rounded-xl bg-white text-emerald-400 shadow'
+                }
+                onClick={() => {
+                    changeCurrentPage(PageType.Active)
+                    addLastPage(PageType.Active)
+                }}
+            >
+                Active
+            </button>
+            <button
+                className={
+                    currentPage === PageType.Completed
+                        ? 'h-12 w-full rounded-xl bg-red-400 text-black shadow'
+                        : 'h-12 w-full rounded-xl bg-white text-red-400 shadow'
+                }
+                onClick={() => {
+                    changeCurrentPage(PageType.Completed)
+                    addLastPage(PageType.Completed)
+                }}
+            >
+                Completed
+            </button>
         </div>
     )
 }
