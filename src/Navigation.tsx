@@ -22,7 +22,7 @@ export function Navigation({
 }: Props) {
     if (currentPage === PageType.Projects) {
         return (
-            <div className="mt-2 flex w-screen gap-2 px-2">
+            <div className="mt-3 flex w-screen gap-3 px-3">
                 <button
                     className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
                     onClick={() => {
@@ -32,7 +32,7 @@ export function Navigation({
                 >
                     <ListBulletIcon className="h-8" />
                 </button>
-                <p className="mb-2 flex h-12 w-full items-center justify-center rounded-lg bg-sky-300 text-black shadow">
+                <p className="flex h-12 w-full items-center justify-center rounded-lg bg-sky-300 text-black shadow">
                     Projects
                 </p>
                 <button
@@ -50,14 +50,14 @@ export function Navigation({
 
     if (currentPage === PageType.Profile) {
         return (
-            <div className="mt-2 flex w-screen gap-2 px-2">
+            <div className="mt-3 flex w-screen gap-3 px-3">
                 <button
                     className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-emerald-400 shadow"
                     onClick={() => changeCurrentPage(PageType.Active)}
                 >
                     <ListBulletIcon className="h-8" />
                 </button>
-                <p className="mb-2 flex h-12 w-full items-center justify-center rounded-lg bg-amber-300 text-black shadow">
+                <p className="flex h-12 w-full items-center justify-center rounded-lg bg-amber-300 text-black shadow">
                     Profile
                 </p>
                 <button
@@ -71,7 +71,7 @@ export function Navigation({
     }
 
     return (
-        <div className="mt-2 flex w-screen gap-2 px-2">
+        <div className="mt-3 flex w-screen gap-3 px-3">
             <button
                 className="flex aspect-square h-12 items-center justify-center rounded-lg bg-white text-sky-400 shadow"
                 onClick={() => changeCurrentPage(PageType.Projects)}
@@ -104,19 +104,6 @@ export function Navigation({
             >
                 Completed
             </button>
-            {/* <button
-                    className={
-                        currentPage === PageType.Profile
-                            ? 'h-12 w-full rounded-lg bg-orange-300 text-black shadow'
-                            : 'h-12 w-full rounded-lg bg-orange-100 text-black shadow'
-                    }
-                    onClick={() => {
-                        changeCurrentPage(PageType.Profile)
-                        addLastPage(PageType.Profile)
-                    }}
-                >
-                    Profile
-                </button> */}
         </div>
     )
 }
