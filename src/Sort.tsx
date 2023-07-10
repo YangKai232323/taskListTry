@@ -5,10 +5,10 @@ interface Props {
     projects: Project[]
 }
 
-export function Sort({ projects }: Props) {
+export function Sort({ projects: _projects }: Props) {
     const [sortState, setSortState] = useState<string>('projects')
 
-    const [sortBy, setSortBy] = useState<string>('complete percents')
+    const [_sortBy, setSortBy] = useState<string>('complete percents')
 
     const [sortBtnsVisibility, setSortBtnsVisibility] = useState<boolean>(false)
 
