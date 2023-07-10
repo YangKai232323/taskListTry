@@ -94,7 +94,7 @@ export function Navigation({
             <button
                 className={
                     currentPage === PageType.Completed
-                        ? 'h-12 w-full rounded-lg bg-red-300 text-black shadow'
+                        ? 'h-12 w-full rounded-lg bg-red-400 text-black shadow'
                         : 'h-12 w-full rounded-lg bg-white text-red-400 shadow'
                 }
                 onClick={() => {
