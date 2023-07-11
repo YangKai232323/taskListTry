@@ -23,10 +23,27 @@ export function ProjectList({
 
     const [clickedProject, setClickedProject] = useState(-1)
 
+    const [subtitle, setSubtitle] = useState('Please enter something before add')
+
     function inputEnterPress(event: any): void {
         if (event.key === 'Enter') {
-            addProject(inputProjectName)
-            setInputProjectName('')
+            // addProject(inputProjectName)
+            // setInputProjectName('')
+            if (inputProjectName) {
+                const nameExist = projects.find((element: Project) => {return element.name === inputProjectName})
+                if (!nameExist) {
+                    addProject(inputProjectName)
+                    setInputProjectName('')}
+                else {setSubtitle("Name is already exist")}}
+            else {
+                setSubtitle("Please enter something before add")
+            }
+        }
+    }
+
+    function backspacePress(event: any): void {
+        if (event.key === 'Backspace') {
+            setSubtitle('')
         }
     }
 
@@ -88,22 +105,41 @@ export function ProjectList({
             )}
 
             <div className="flex p-4">
-                <input
-                    type="text"
-                    placeholder="Enter project name"
-                    value={inputProjectName}
-                    className="h-10 w-full bg-white px-2 outline-none focus:bg-gray-100 rounded-lg"
-                    onInput={(event: any) =>
-                        setInputProjectName(event.target.value)
-                    }
-                    onKeyDown={inputEnterPress}
-                />
+                <div className="flex flex-col">
+                    <input
+                        type="text"
+                        placeholder="Enter project name"
+                        value={inputProjectName}
+                        className="h-10 w-full bg-white px-2 outline-none focus:bg-gray-100 rounded-lg"
+                        onInput={(event: any) =>{
+                            setInputProjectName(event.target.value)
+                            const nameExist = projects.find((element: Project) => {return element.name === event.target.value}) 
+                            if (nameExist) {
+                                setSubtitle('Name is already exist')
+                            }        
+                            else if (!event.target.value) {
+                                setSubtitle('Please enter something before add')
+                            }
+                            else {
+                                setSubtitle('')
+                            }                               
+                        }}
+                        onKeyDown={(event: any) => {inputEnterPress(event)
+                        backspacePress(event)}}
+                    />
+                    <p className='text-base text-red-500'>{subtitle}</p>
+                </div>
                 <button
                     className="ml-2 flex h-10 w-10 items-center justify-center border-2 border-gray-700 p-0"
                     onClick={() => {
-                        addProject(inputProjectName)
-                        setInputProjectName('')
-                    }}
+                        if (inputProjectName) {
+                            const nameExist = projects.find((element: Project) => {return element.name === inputProjectName})
+                            if (!nameExist) {
+                                addProject(inputProjectName)
+                                setInputProjectName('')}
+                            
+                        
+                            }}}
                 >
                     <PlusIcon className="m-0 h-10 w-10"> </PlusIcon>
                 </button>
