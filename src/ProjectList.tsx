@@ -31,7 +31,7 @@ export function ProjectList({
     }
 
     return (
-        <div className="mt-2 rounded-xl border-2 border-gray-800 bg-slate-300 p-2">
+        <div className="mt-2 rounded-xl border-2 bg-white p-2 shadow-lg">
             <Sort projects={projects}></Sort>
             <ul className="grid md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, projectId) => {
@@ -43,7 +43,7 @@ export function ProjectList({
 
                     return (
                         <li
-                            className="m-3 flex flex-col items-center border-2 bg-slate-200 transition-all  "
+                            className="m-3 flex flex-col items-center shadow-xl bg-white transition-all  "
                             onClick={() => {
                                 setClickedProject(projectId)
                                 setIsMenuVisible(true)
@@ -92,7 +92,7 @@ export function ProjectList({
                     type="text"
                     placeholder="Enter project name"
                     value={inputProjectName}
-                    className="h-10 w-full bg-slate-300 px-2 outline-none hover:bg-gray-200 focus:bg-gray-200"
+                    className="h-10 w-full bg-white px-2 outline-none focus:bg-gray-100 rounded-lg"
                     onInput={(event: any) =>
                         setInputProjectName(event.target.value)
                     }

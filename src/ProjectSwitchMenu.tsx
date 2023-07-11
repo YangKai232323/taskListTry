@@ -16,7 +16,7 @@ export function ProjectSwitchMenu({
     close,
 }: Props) {
     return (
-        <div className="flex flex-col absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform gap-6 p-6 bg-slate-300 rounded-xl justify-center items-center break-all w-64 h-72 shadow-2xl transition-all shadow-slate-900">
+        <div className="flex flex-col absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform gap-6 p-6 bg-white rounded-xl justify-center items-center break-all w-64 h-72 shadow-2xl transition-all shadow-slate-900">
             <p className='justify-center items-center font-semibold text-xl'>{projects[projectId].name}</p>
             <div className="flex items-center justify-center">
                 <button
