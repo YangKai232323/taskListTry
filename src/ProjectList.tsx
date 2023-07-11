@@ -43,7 +43,7 @@ export function ProjectList({
 
                     return (
                         <li
-                            className="m-3 flex flex-col items-center border-2 border-gray-800 bg-slate-200 transition-all hover:cursor-pointer hover:shadow-lg hover:shadow-slate-500 "
+                            className="m-3 flex flex-col items-center border-2 bg-slate-200 transition-all  "
                             onClick={() => {
                                 setClickedProject(projectId)
                                 setIsMenuVisible(true)
@@ -75,6 +75,7 @@ export function ProjectList({
 
             {showMenu && (
                 <ProjectSwitchMenu
+                projects={projects}
                     projectId={clickedProject}
                     close={() => setIsMenuVisible(false)}
                     enterProject={(clickedProject) =>
