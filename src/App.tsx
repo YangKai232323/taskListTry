@@ -14,6 +14,8 @@ function App() {
 
     const [currentAvatar, setCurrentAvatar] = useState(9)
 
+    const [forSearch, setForSearch] = useState<[[string, string]]>([['', '']])
+
     function setProjects(projectList: Project[]): void {
         setInMemoryProjects(projectList)
         localStorage.setItem('projects', JSON.stringify(projectList))
@@ -59,6 +61,7 @@ function App() {
 
     function addTask(task: Task) {
         setTasks([...tasks, task])
+        setForSearch([...forSearch, [task.name,'task']])
     }
 
     const [history, setHistory] = useState<any>([])
@@ -82,6 +85,7 @@ function App() {
         const tasksForSet = tasks.filter((task) => task.name !== taskName)
         setTasks(tasksForSet)
         addToHistory(taskName, projects[currentProject].name, 'deleted')
+        const tasksForSetForSearch = forSearch.filter(task => task[1] === 'task')
     }
 
     if (currentPage === PageType.Completed) {

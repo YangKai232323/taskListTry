@@ -16,6 +16,7 @@ export enum PageType {
     Projects = 'projects',
     Profile = 'profile',
     History = 'history',
+    Search = 'search'
 }
 
 export enum SortBy {

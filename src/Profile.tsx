@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Project, PageType } from './types'
 import { AvatarMenu } from './AvatarMenu'
+import { Search } from './Search'
 
 interface Props {
     projects: Project[]
@@ -83,6 +84,7 @@ export function Profile({
                 <button onClick={() => changeCurrentPage(PageType.History)}>
                     Check History
                 </button>
+                <Search projects={projects}/>
             </div>
         </>
     )
