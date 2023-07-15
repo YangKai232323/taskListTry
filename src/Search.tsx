@@ -1,17 +1,28 @@
 import { useState } from "react";
-import { PageType, Project } from "./types";
+import { PageType, Project, Task } from "./types";
 
 interface Props {
-    projects: Project[]
+    tasksData: Task[]
+    projects?: Project[]
     page: PageType
 }
 
-export function Search({projects, page}: Props) {
+export function Search({tasksData, projects, page}: Props) {
     const [inputValue, setInputValue] = useState<string>('')
 
-    function search(item: string, massive: [element: any]): void {
-        massive.filter(element => element.name[item.length - 1] === item)
+    let answer = ''
+
+    function searchProjects(item: string, massive: Project[]): any {
+        let answer = massive.filter(element => element.name[item.length - 1] === item)
+        return answer
     }
+
+    function searchTasks(item: string, massive: Task[]): any {
+        let answer = massive.filter(element => element.name[item.length - 1] === item)
+        return answer
+    }
+
+    // const [tasksData, setTasksData] = useState<Task[]>([{name: '1', state: true, value: 0}])
 
     const returnable = []
 
@@ -21,9 +32,12 @@ export function Search({projects, page}: Props) {
                 {setInputValue(event.target.value)}
             }/>
             <ul>
-                {page==="projects"?(<>
-                    
-                </>):()}
+                {page==="projects"?(
+                <>
+                    <li>{searchProjects(inputValue, (projects || []))}</li>
+                </>):(<>
+                    <li>{searchTasks(inputValue, tasksData)}</li>
+                </>)}
             </ul>
         </>
     )

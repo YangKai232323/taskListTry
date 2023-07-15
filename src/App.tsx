@@ -16,6 +16,8 @@ function App() {
 
     const [forSearch, setForSearch] = useState<[[string, string]]>([['', '']])
 
+    const [tasksData, setTasksData] = useState<Task[]>([{name: '1', state: true, value: 0}])
+
     function setProjects(projectList: Project[]): void {
         setInMemoryProjects(projectList)
         localStorage.setItem('projects', JSON.stringify(projectList))
@@ -61,7 +63,7 @@ function App() {
 
     function addTask(task: Task) {
         setTasks([...tasks, task])
-        setForSearch([...forSearch, [task.name,'task']])
+        // setForSearch([...forSearch, [task.name,'task']])
     }
 
     const [history, setHistory] = useState<any>([])
@@ -153,6 +155,11 @@ function App() {
                             state: false,
                             value: 10,
                         })
+                        setTasksData([...tasksData, {
+                            name: taskName,
+                            state: false,
+                            value: 10,
+                        }])
                         addToHistory(
                             taskName,
                             projects[currentProject]?.name,
