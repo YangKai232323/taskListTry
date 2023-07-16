@@ -11,12 +11,12 @@ export function Search({tasksData, projects, page}: Props) {
     const [inputValue, setInputValue] = useState<string>('')
 
     function searchProjects(item: string, massive?: Project[]): any {
-        let answer = massive?.filter(element => element.name[item.length - 1] === item)
+        let answer = massive?.filter(element => element.name.includes(item))
         return answer
     }
 
     function searchTasks(item: string, massive?: Task[]): any {
-        let answer = massive?.filter(element => element.name[item.length - 1] === item)
+        let answer = massive?.filter(element => element.name.includes(item))
         return answer
     }
 
