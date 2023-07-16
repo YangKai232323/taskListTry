@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PageType, Project, Task } from "./types";
 
 interface Props {
-    tasksData: Task[]
+    tasksData?: Task[]
     projects?: Project[]
     page: PageType
 }
@@ -10,21 +10,17 @@ interface Props {
 export function Search({tasksData, projects, page}: Props) {
     const [inputValue, setInputValue] = useState<string>('')
 
-    let answer = ''
-
-    function searchProjects(item: string, massive: Project[]): any {
-        let answer = massive.filter(element => element.name[item.length - 1] === item)
+    function searchProjects(item: string, massive?: Project[]): any {
+        let answer = massive?.filter(element => element.name[item.length - 1] === item)
         return answer
     }
 
-    function searchTasks(item: string, massive: Task[]): any {
-        let answer = massive.filter(element => element.name[item.length - 1] === item)
+    function searchTasks(item: string, massive?: Task[]): any {
+        let answer = massive?.filter(element => element.name[item.length - 1] === item)
         return answer
     }
 
     // const [tasksData, setTasksData] = useState<Task[]>([{name: '1', state: true, value: 0}])
-
-    const returnable = []
 
     return (
         <>
@@ -33,10 +29,16 @@ export function Search({tasksData, projects, page}: Props) {
             }/>
             <ul>
                 {page==="projects"?(
-                <>
-                    <li>{searchProjects(inputValue, (projects || []))}</li>
+                <>{searchProjects(inputValue, projects).map((project: Project) => {return(<li>
+                    {project.name}
+                </li>)})}
+                    {/* <li className="bg-slate-300 p-4 m-4 text-lg">{searchProjects(inputValue, projects)}</li> */}
                 </>):(<>
-                    <li>{searchTasks(inputValue, tasksData)}</li>
+                    {/* <li>{searchTasks(inputValue, tasksData)}</li>
+                     */}
+                    {searchTasks(inputValue, tasksData).map((task: Task) => {return(<li>
+                    {task.name}
+                </li>)})}
                 </>)}
             </ul>
         </>

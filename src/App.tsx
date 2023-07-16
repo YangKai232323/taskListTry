@@ -6,6 +6,7 @@ import { Navigation } from './Navigation'
 import { Profile } from './Profile'
 import { History } from './History'
 import { TaskAdd } from './TaskAdd'
+import { Search } from './Search'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>(PageType.Active)
@@ -168,6 +169,7 @@ function App() {
                         return 'All ok'
                     }}
                 />
+                <Search page={PageType.Active} tasksData={tasksData}  />
             </div>
         )
     } else if (currentPage === PageType.Projects) {
@@ -201,6 +203,7 @@ function App() {
                         setCurrentPage(PageType.Active)
                     }}
                 ></ProjectList>
+                <Search page={PageType.Projects} projects={projects}/>
             </div>
         )
     } else if (currentPage === PageType.Profile) {
